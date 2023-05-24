@@ -15,7 +15,7 @@ public class Item : MonoBehaviour
     {
         
     }
-
+    //test
     private void OnTriggerEnter(Collider coll)
     {
         if(coll.tag == "Player")

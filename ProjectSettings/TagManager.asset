@@ -9,6 +9,7 @@ TagManager:
   - head
   - Button
   - InputField
+  - ItemImage
   layers:
   - Default
   - TransparentFX

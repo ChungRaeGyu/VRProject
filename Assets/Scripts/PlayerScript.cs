@@ -18,6 +18,7 @@ public class PlayerScript : MonoBehaviour
     private bool invenClick = false;
 
     public GameObject UIImage;
+    public GameObject HealthImage;
     public Text HealthItem;
 
     // Start is called before the first frame update
@@ -68,6 +69,7 @@ public class PlayerScript : MonoBehaviour
             {
                 Debug.Log("¿ÞÂÊ UI ³ª¿Í¶ó");
                 UIImage.GetComponent<Image>().enabled = true;
+                HealthImage.GetComponent<Image>().enabled = true;
                 HealthItem.GetComponent<Text>().enabled = true;
                 invenClick = true;
             }
@@ -75,6 +77,7 @@ public class PlayerScript : MonoBehaviour
             {
                 Debug.Log("¿ÞÂÊ UI »ç¶óÁ®");
                 UIImage.GetComponent<Image>().enabled = false;
+                HealthImage.GetComponent<Image>().enabled = false;
                 HealthItem.GetComponent<Text>().enabled = false;
                 invenClick = false;
             }

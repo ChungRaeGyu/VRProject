@@ -18,10 +18,11 @@ public class Item : MonoBehaviour
     //test
     private void OnTriggerEnter(Collider coll)
     {
-        if(coll.tag == "Player")
+        if(coll.tag == "GameController")
         {
             Destroy(gameObject);
             Inventory.HelingItemNum += 1;
+            return;
         }
     }
 

@@ -1017,6 +1017,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: DistanceGrabHandRight
       objectReference: {fileID: 0}
+    - target: {fileID: 4437206530954420, guid: 6fae51a9f4170334e8639e8dbfc0a54b, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 4437206530954420, guid: 6fae51a9f4170334e8639e8dbfc0a54b, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 4437206530954420, guid: 6fae51a9f4170334e8639e8dbfc0a54b, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4580194091363106, guid: 6fae51a9f4170334e8639e8dbfc0a54b, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -1349,7 +1361,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: -0.099998474, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1370514247
@@ -1529,7 +1541,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7d08f0376196224ebfa85a9c15c63b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  test: 0
   UIImage: {fileID: 2090847471}
+  HealthImage: {fileID: 0}
   HealthItem: {fileID: 571657166}
 --- !u!114 &1437911382
 MonoBehaviour:
@@ -1896,6 +1910,14 @@ PrefabInstance:
     - target: {fileID: 4669234126623968, guid: 0242aa8515b4bc947a945a5c6df83ee9, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: 4703665023126470, guid: 0242aa8515b4bc947a945a5c6df83ee9, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.25
+      objectReference: {fileID: 0}
+    - target: {fileID: 4703665023126470, guid: 0242aa8515b4bc947a945a5c6df83ee9, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 54235072654568206, guid: 0242aa8515b4bc947a945a5c6df83ee9, type: 3}
       propertyPath: m_UseGravity

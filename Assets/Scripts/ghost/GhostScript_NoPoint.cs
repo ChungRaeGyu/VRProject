@@ -71,28 +71,21 @@ public class GhostScript_NoPoint : MonoBehaviour
                     StartCoroutine(Fadein(fadeDuration));
                 }
 
-                //targetCheck가 true일때 시간 제한 //적을 쫓아 갈 때
+                //--------------------------------------------targetCheck가 true일때 시간 제한 //적을 쫓아 갈 때
                 time += Time.deltaTime;
                 if (time > timer)
                 {
-                    StartCoroutine(lost(false)); //플레이어를 놓치면 잠깐 멈춤
+                    //StartCoroutine(lost(false)); //플레이어를 놓치면 잠깐 멈춤
                     time = 0;
                 }
 
                 //플레이어와 귀신의 거리 계산
                 float distance = Vector3.Distance(transform.position, Player.position);
-                //거리가 멀어지면 놓친다.                    
+                //----------------------------------------------------------------------거리가 멀어지면 놓친다.                    
                 if (distance > playerDistance)
                 {
-                    Debug.Log("거리가 멀어져서 놓침");
-                    StartCoroutine(lost(false));
-                }
-                if (distance < 1)
-                {
-                    GameObject.Find("Main Camera").GetComponent<Camera>().enabled = false;
-                    GameObject.Find("Main Camera").GetComponent<AudioListener>().enabled = false;
-                    GameObject.Find("CatchCamera").GetComponent<Camera>().enabled = true;
-                    GameObject.Find("CatchCamera").GetComponent<AudioListener>().enabled = true;
+                    //Debug.Log("거리가 멀어져서 놓침");
+                    //StartCoroutine(lost(false));
                 }
             }
         }else{

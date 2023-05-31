@@ -35,6 +35,11 @@ public class PlayerScript : MonoBehaviour
         attention_level=test;
         if (PlayerHP <= 0)
         {
+            //시점 전환 
+            GameObject.Find("Main Camera").GetComponent<Camera>().enabled = false;
+            GameObject.Find("Main Camera").GetComponent<AudioListener>().enabled = false;
+            GameObject.Find("CatchCamera").GetComponent<Camera>().enabled = true;
+            GameObject.Find("CatchCamera").GetComponent<AudioListener>().enabled = true;
             PlayerDie = true;
             return;
         }

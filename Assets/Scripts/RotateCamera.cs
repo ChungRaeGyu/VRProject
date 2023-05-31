@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class RotateCamera : MonoBehaviour
 {
-    private Renderer renderer;
+    private Renderer renderers;
 
     private void Start()
     {
         // Renderer 컴포넌트 가져오기
-        renderer = GetComponent<Renderer>();
+        renderers = GetComponent<Renderer>();
     }
 
     private void OnTriggerStay(Collider other)
@@ -18,7 +18,7 @@ public class RotateCamera : MonoBehaviour
         if (other.CompareTag("head")) // YourTag는 해당 오브젝트를 식별하는 태그로 바꿔야 합니다
         {
             // 렌더링 끄기
-            renderer.enabled = false;
+            renderers.enabled = false;
         }
     }
 }

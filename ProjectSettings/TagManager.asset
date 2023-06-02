@@ -10,6 +10,7 @@ TagManager:
   - Button
   - InputField
   - ItemImage
+  - GameControllerL
   layers:
   - Default
   - TransparentFX

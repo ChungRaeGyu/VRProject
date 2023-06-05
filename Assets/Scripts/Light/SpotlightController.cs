@@ -6,7 +6,7 @@ public class SpotlightController : MonoBehaviour
 {
     Light[] Spotlight;
     int i=0;
-    
+    AudioSource[] lightsound;
     Vector3[] position=new Vector3[]{
         new Vector3(0.627f, 3.510628f, -40.83f),
         new Vector3(0.627f, 3.510628f, -31.033f),
@@ -16,7 +16,7 @@ public class SpotlightController : MonoBehaviour
     void Start()
     {
         Spotlight=GetComponentsInChildren<Light>();
-        
+        lightsound =GetComponentsInChildren<AudioSource>();
     }
 
     // Update is called once per frame
@@ -30,6 +30,7 @@ public class SpotlightController : MonoBehaviour
         yield return new WaitForSecondsRealtime(7f);
         for(i =0;i<Spotlight.Length;i++){
             yield return new WaitForSecondsRealtime(1f);
+            lightsound[i].Play();
             Spotlight[i].enabled = true;
             GameObject.Find("HorrorGirl").transform.position=position[i];
             yield return new WaitForSecondsRealtime(1f);

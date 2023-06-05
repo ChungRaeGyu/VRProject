@@ -22,24 +22,26 @@ public class PlayerScript : MonoBehaviour
     public GameObject UIImage;
     public GameObject HealthImage;
     public Text HealthItem;
-
+    float timer;
+    float settime = 5f;
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
         attention_level=test;
-        if (PlayerHP <= 0)
+        if (PlayerHP <= 0&&PlayerDie==false)
         {
             //시점 전환 
             GameObject.Find("Main Camera").GetComponent<Camera>().enabled = false;
             GameObject.Find("Main Camera").GetComponent<AudioListener>().enabled = false;
             GameObject.Find("CatchCamera").GetComponent<Camera>().enabled = true;
             GameObject.Find("CatchCamera").GetComponent<AudioListener>().enabled = true;
+            GameObject.Find("HorrorGirl").GetComponent<GhostScript_NoPoint>().PlayerDIeAction(); //점멸효과의 시작
             PlayerDie = true;
             return;
         }
@@ -49,6 +51,16 @@ public class PlayerScript : MonoBehaviour
         {
             //추적시작
             GameObject.Find("HorrorGirl").GetComponent<GhostScript_NoPoint>().setDirection(transform.position);
+        }
+        else if(attention_level>=50){
+            if(timer>settime){
+                Debug.Log("실행");
+                timer=0;
+                if(Random.Range(1,10)%5==0){
+                    GameObject.Find("HorrorGirl").GetComponent<GhostScript_NoPoint>().over50per();
+                }
+            }
+            timer+=Time.deltaTime;
         }
 
         int HealthItemNum = Inventory.HelingItemNum;
@@ -105,5 +117,4 @@ public class PlayerScript : MonoBehaviour
         }
 
     }
-
 }

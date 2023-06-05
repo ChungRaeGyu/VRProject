@@ -34,17 +34,22 @@ public class GhostScript_NoPoint : MonoBehaviour
     //--------------------------------------------Anim
     Animator anim;
     //-------------------------------------------------ghost audio
-    AudioSource audioSource;
+    AudioSource over50perSound;
+
+    Rigidbody rigid;
     // Start is called before the first frame update
     void Start()
     {
+        over50perSound = GetComponent<AudioSource>();
+        rigid = GetComponent<Rigidbody>();
         nav = GetComponent<NavMeshAgent>();
+        //사라지는 효과를 위한 Renderer
         cloth = transform.GetChild(0).GetComponent<Renderer>().material;
         girl = transform.GetChild(1).GetComponent<Renderer>().material;
         hairs = transform.GetChild(2).GetComponent<Renderer>().material;
         tr = GetComponent<Transform>();
         anim = GetComponent<Animator>();
-        audioSource = GameObject.Find("Spot Light").GetComponent<AudioSource>();
+        
         //초기값 저장
     }
     // Update is called once per frame
@@ -53,17 +58,7 @@ public class GhostScript_NoPoint : MonoBehaviour
         //플레이어를 식별 했을 때 와 안했을 때를 구분
         //targetCheck는 setDirection함수에 있다.
         if(!diestart){
-            if (!targetCheck)
-            {
-                //플레이어를 놓치면 사라진다.
-                //first는 한번만 실행하기 위한 것이다.
-                if (first)
-                {
-                    first = false;
-                    StartCoroutine(Fadeout());
-                }
-            }
-            else
+            if (targetCheck)
             {
                 if (first)
                 {
@@ -87,16 +82,68 @@ public class GhostScript_NoPoint : MonoBehaviour
                     //Debug.Log("거리가 멀어져서 놓침");
                     //StartCoroutine(lost(false));
                 }
+               
+            }
+            else
+            {
+                //플레이어를 놓치면 사라진다.
+                //first는 한번만 실행하기 위한 것이다.
+                if (first)
+                {
+                    first = false;
+                    //StartCoroutine(Fadeout());
+                }
             }
         }else{
-            if(die){
-                die=false;
-                audioSource.Play();
-                StartCoroutine(Fadein(1));
-                SpotlightController light =GameObject.Find("SpotlightController").GetComponent<SpotlightController>();
-                light.StartCoroutine(light.lightout());
-            }
+            return;
         }
+    }
+    IEnumerator velocity0(){
+        yield return new WaitForSecondsRealtime(2.5f);
+        rigid.velocity=transform.forward*0f;
+        float elapsedTime = 0f;
+        while (elapsedTime < fadeDuration)
+        {
+            // 경과 시간에 따라 Alpha 값 서서히 변경
+            elapsedTime += Time.deltaTime;
+            float t = elapsedTime / fadeDuration;
+            currentAlpha = Mathf.Lerp(1, 0, t);
+
+            // Material의 Alpha 값 설정
+            Color gcolor = girl.color;
+            gcolor.a = currentAlpha;
+            girl.color = gcolor;
+
+            Color hcolor = hairs.color;
+            hcolor.a = currentAlpha;
+            hairs.color = hcolor;
+
+            Color ccolor = cloth.color;
+            ccolor.a = currentAlpha;
+            cloth.color = ccolor;
+            yield return null;
+        }
+    }
+    public void over50per(){ //정신력 수치가 50퍼 이상일 때
+        nav.enabled=false;
+        over50perSound.Play();
+        //플레이어의 뒤에 그리고 90도로 사라지기 
+        GameObject Playertr = GameObject.Find("OVRPlayerController");
+        //Plyaer포지션에 방향에서 12만큼만 빼준다.
+        transform.position = Playertr.transform.position - Playertr.transform.forward * 4;
+        transform.position -= new Vector3(0, 1.5f, 0);
+        Quaternion newRotation = Quaternion.Euler(0f, Playertr.transform.rotation.y + 90, 0f);
+        transform.rotation = newRotation;
+        rigid.velocity = transform.forward * 1.5f;
+        StartCoroutine(velocity0());
+    }
+    //PlayerScript에서 사용
+    public void PlayerDIeAction(){
+        diestart=true; //한번만 하기 위한 값
+        
+        StartCoroutine(Fadein(1));
+        SpotlightController light = GameObject.Find("SpotlightController").GetComponent<SpotlightController>();
+        light.StartCoroutine(light.lightout());
     }
     private System.Collections.IEnumerator Fadeout()
     {
@@ -180,7 +227,9 @@ public class GhostScript_NoPoint : MonoBehaviour
         first=true;
         time = 0;
         playerDistance = 10f;
+        
     }
+
     //---------------------------------------------------------------------------------목표 추적
     //목표를 향해 쫓아 간다.
     //ghostRange에서 호출할 것이다.
@@ -192,6 +241,8 @@ public class GhostScript_NoPoint : MonoBehaviour
         targetCheck = true;
         first=true;
         }
+        nav.enabled = true;
         nav.SetDestination(target);
     }
+    
 }

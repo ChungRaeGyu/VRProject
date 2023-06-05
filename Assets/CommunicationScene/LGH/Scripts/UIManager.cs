@@ -48,6 +48,18 @@ public class UIManager : MonoBehaviour
     public Text serverConnectText;
     public Button offlineButton;
 
+    public Button registerIDCheckButton;
+    public Text registerIDCheckText;
+    public Button registerNnCheckButton;
+    public Text registerNnCheckText;
+
+    public GameObject playerScreen;
+    public GameObject mainUI;
+
+    public Button menuOptionButton;
+    public Button menuExitButton;
+    public Button menuCancleButton;
+
     [System.Obsolete]
     void Start()
     {
@@ -65,7 +77,18 @@ public class UIManager : MonoBehaviour
         gameStartButton.onClick.AddListener(OnGameStartButtonAct);
 
         offlineButton.onClick.AddListener(OnGameStartButtonAct);
+
+        registerIDCheckButton.onClick.AddListener(OnRegisterIDCheckButtonClicked);
+        registerNnCheckButton.onClick.AddListener(OnRegisterNnCheckButtonClicked);
+
+        menuOptionButton.onClick.AddListener(OnMenuOptionButtonAct);
+        menuExitButton.onClick.AddListener(OnMenuExitButtonAct);
+        menuCancleButton.onClick.AddListener(OnMenuCancleButtonAct);
     }
+
+    /**
+     * 내부 사용
+     */
 
     void OnRegisterFormButtonAct()
     {
@@ -94,6 +117,29 @@ public class UIManager : MonoBehaviour
     void OnGameStartButtonAct()
     {
         SceneManager.LoadScene("Hospital/Scenes/ShowCase 1");
+    }
+
+    void OnMenuOptionButtonAct()
+    {
+
+    }
+
+    void OnMenuExitButtonAct()
+    {
+        GameManager.GM.PM.setPause(false);
+
+        Application.Quit();
+    }
+
+    void OnMenuCancleButtonAct()
+    {
+        GameManager.GM.PM.setPause(false);
+
+        GameManager.GM.PM.setPlayerScreen = false;
+
+        playerScreen.SetActive(false);
+
+        mainUI.SetActive(true);
     }
 
     /**
@@ -126,6 +172,22 @@ public class UIManager : MonoBehaviour
         GameManager.GM.SM.LogoutAct();
     }
 
+    [System.Obsolete]
+    void OnRegisterIDCheckButtonClicked()
+    {
+        string id = registerIDIF.text;
+
+        GameManager.GM.SM.CheckIDAct(id);
+    }
+
+    [System.Obsolete]
+    void OnRegisterNnCheckButtonClicked()
+    {
+        string nn = registerNnIF.text;
+
+        GameManager.GM.SM.CheckNnAct(nn);
+    }
+
     /**
      * SM 에게 연동 되는 부분     
      */
@@ -135,7 +197,7 @@ public class UIManager : MonoBehaviour
         bool isOpen;
         isOpen = network;
         serverConnectText.text = sCT;
-        
+
         if (isOpen == true)
         {
             // offlineButton.gameObject.SetActive(false);
@@ -205,6 +267,9 @@ public class UIManager : MonoBehaviour
         registerIDText.text = "";
         registerPwText.text = "";
         registerNnText.text = "";
+
+        registerIDCheckText.text = "";
+        registerNnCheckText.text = "";
     }
 
     public void RegisterConfirmTextNull()
@@ -216,5 +281,26 @@ public class UIManager : MonoBehaviour
     {
         loginIDText.text = "";
         loginPwText.text = "";
+    }
+
+    public void CheckIDText(string idCheck)
+    {
+        registerIDCheckText.text = idCheck;
+    }
+
+    public void CheckNnText(string nnCheck)
+    {
+        registerNnCheckText.text = nnCheck;
+    }
+
+    /**
+     * PM 에게 연동되는 부분
+     */
+     
+    public void SwitchPlayerScreen(bool sPS)
+    {
+        playerScreen.SetActive(sPS);
+
+        mainUI.SetActive(!sPS);
     }
 }

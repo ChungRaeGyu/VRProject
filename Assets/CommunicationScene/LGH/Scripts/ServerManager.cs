@@ -8,6 +8,8 @@ using System.Text.RegularExpressions;
 
 public class ServerManager : MonoBehaviour
 {
+    public int playerNum;
+
     [Obsolete]
     void OpenClient()
     {
@@ -18,6 +20,8 @@ public class ServerManager : MonoBehaviour
     private void Awake()
     {
         OpenClient();
+
+        DontDestroyOnLoad(this.gameObject);
     }
 
     /**
@@ -78,6 +82,18 @@ public class ServerManager : MonoBehaviour
     public void LogoutAct()
     {
         StartCoroutine(Logout());
+    }
+
+    [Obsolete]
+    public void CheckIDAct(string id)
+    {
+        StartCoroutine(CheckId(id));
+    }
+
+    [Obsolete]
+    public void CheckNnAct(string nn)
+    {
+        StartCoroutine(CheckNick(nn));
     }
 
     /**
@@ -208,11 +224,30 @@ public class ServerManager : MonoBehaviour
             }
             else
             {
-                Debug.Log("회원가입 성공!");
+                if (www.downloadHandler.text == "이미 존재하는 ID입니다.")
+                {
+                    Debug.Log("ID가 이미 존재합니다.");
 
-                GameManager.GM.UM.RegisterSuccess();
+                    string checkID;
+                    checkID = "ID가 이미 존재합니다.";
+                    GameManager.GM.UM.CheckIDText(checkID);
+                }
+                else if (www.downloadHandler.text == "이미 존재하는 닉네임입니다.")
+                {
+                    Debug.Log("닉네임이 이미 존재합니다.");
 
-                GameManager.GM.UM.RegisterTextNull();
+                    string checkNn;
+                    checkNn = "닉네임이 이미 존재합니다.";
+                    GameManager.GM.UM.CheckNnText(checkNn);
+                }
+                else
+                {
+                    Debug.Log("회원가입 성공!");
+
+                    GameManager.GM.UM.RegisterSuccess();
+
+                    GameManager.GM.UM.RegisterTextNull();
+                }
             }
         }
     }
@@ -296,6 +331,8 @@ public class ServerManager : MonoBehaviour
                     Debug.Log("로그인 성공!");
                     Debug.Log("사용자 번호: " + response.num);
 
+                    playerNum = response.num;
+
                     GameManager.GM.UM.LoginTextNull();
 
                     GameManager.GM.UM.LoginSuccess();
@@ -328,12 +365,90 @@ public class ServerManager : MonoBehaviour
                 {
                     Debug.Log("로그아웃 성공!");
 
+                    playerNum = -1;
+
                     GameManager.GM.UM.LogoutSuccess();
                 }
                 else
                 {
                     Debug.Log("로그아웃 실패!");
                 }
+            }
+        }
+    }
+
+    [Obsolete]
+    IEnumerator CheckId(string id)
+    {
+        WWWForm form = new WWWForm();
+        form.AddField("id", id);
+
+        using (UnityWebRequest www = UnityWebRequest.Post("http://43.201.175.73:3000/checkId", form))
+        {
+            yield return www.SendWebRequest();
+
+            if (www.isNetworkError || www.isHttpError)
+            {
+                Debug.Log(www.error);
+            }
+            else
+            {
+                Debug.Log(www.downloadHandler.text);
+
+                string checkID;
+
+                if (www.downloadHandler.text == "이미 존재하는 ID입니다.")
+                {
+                    Debug.Log("ID가 이미 존재합니다.");
+
+                    checkID = "ID가 이미 존재합니다.";
+                }
+                else
+                {
+                    Debug.Log("사용 가능한 ID입니다.");
+
+                    checkID = "사용 가능한 ID입니다.";
+                }
+
+                GameManager.GM.UM.CheckIDText(checkID);
+            }
+        }
+    }
+
+    [Obsolete]
+    IEnumerator CheckNick(string nick)
+    {
+        WWWForm form = new WWWForm();
+        form.AddField("nick", nick);
+
+        using (UnityWebRequest www = UnityWebRequest.Post("http://43.201.175.73:3000/checkNick", form))
+        {
+            yield return www.SendWebRequest();
+
+            if (www.isNetworkError || www.isHttpError)
+            {
+                Debug.Log(www.error);
+            }
+            else
+            {
+                Debug.Log(www.downloadHandler.text);
+
+                string checkNn;
+
+                if (www.downloadHandler.text == "이미 존재하는 닉네임입니다.")
+                {
+                    Debug.Log("닉네임이 이미 존재합니다.");
+
+                    checkNn = "닉네임이 이미 존재합니다.";
+                }
+                else
+                {
+                    Debug.Log("사용 가능한 닉네임입니다.");
+
+                    checkNn = "사용 가능한 닉네임입니다.";
+                }
+
+                GameManager.GM.UM.CheckNnText(checkNn);
             }
         }
     }

@@ -24,6 +24,12 @@ public class Item : MonoBehaviour
             Inventory.HelingItemNum += 1;
             return;
         }
+        if (coll.tag == "GameControllerL")
+        {
+            Destroy(gameObject);
+            Inventory.HelingItemNum += 1;
+            return;
+        }
     }
 
 }

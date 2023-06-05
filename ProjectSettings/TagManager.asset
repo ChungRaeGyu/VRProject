@@ -10,6 +10,7 @@ TagManager:
   - Button
   - InputField
   - ItemImage
+  - GameControllerL
   layers:
   - Default
   - TransparentFX
@@ -25,7 +26,7 @@ TagManager:
   - Interactive
   - Typing Hands
   - Keyboard
-  - 
+  - DistanceItem
   - 
   - 
   - 

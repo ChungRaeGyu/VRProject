@@ -10,8 +10,18 @@ public class PlayerScript : MonoBehaviour
     /// 플레이어 죽음, 컨트롤러 클릭 관련 cs 파일
     /// </summary>
     public static int PlayerHP = 3;
-    public static int attention_level; //어그로 수치
-    public int test;
+    //어그로 수치 관련 {
+    public static float attention_level; //어그로 수치
+    public float test;
+    public float num;
+    //어그로가 0이 아닐때 일정량만큼 수치를 떨어뜨리기 위한 값
+    float decreaseTimer=5f;
+    float decreaseAmount = 1;
+    //어그로 수치가 50퍼 이상일때 귀신이 가끔 나오게 하기 위한 것이다.
+    float timer;
+    float settime = 5f;
+
+    //}
     public static bool PlayerDie = false;
     public static bool RNear = false;
     public static bool LeftClick = false;
@@ -22,18 +32,17 @@ public class PlayerScript : MonoBehaviour
     public GameObject UIImage;
     public GameObject HealthImage;
     public Text HealthItem;
-    float timer;
-    float settime = 5f;
+
     // Start is called before the first frame update
     void Start()
     {
-
+        attention_level = test;
     }
 
     // Update is called once per frame
     void Update()
     {
-        attention_level=test;
+        num=attention_level;
         if (PlayerHP <= 0&&PlayerDie==false)
         {
             //시점 전환 
@@ -45,7 +54,7 @@ public class PlayerScript : MonoBehaviour
             PlayerDie = true;
             return;
         }
-
+        //어그로 수치 관련~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         //어그로수치가 100이상 되면 추적시작
         if (attention_level >= 100)
         {
@@ -54,13 +63,22 @@ public class PlayerScript : MonoBehaviour
         }
         else if(attention_level>=50){
             if(timer>settime){
-                Debug.Log("실행");
                 timer=0;
                 if(Random.Range(1,10)%5==0){
                     GameObject.Find("HorrorGirl").GetComponent<GhostScript_NoPoint>().over50per();
                 }
             }
             timer+=Time.deltaTime;
+        }
+        //어그로 수치를 5초당 1씩 줄어들게 한다.
+        if(attention_level!=0&&attention_level>=100){
+            decreaseTimer -= Time.deltaTime;
+            if(decreaseTimer<=0)
+            {
+                attention_level-=decreaseAmount;
+                Debug.Log("감소");
+                decreaseTimer=5f;
+            }
         }
 
         int HealthItemNum = Inventory.HelingItemNum;

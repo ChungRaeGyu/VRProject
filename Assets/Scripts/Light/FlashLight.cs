@@ -34,7 +34,7 @@ public class FlashLight : MonoBehaviour
             if(!LightON)
                 GameObject.Find("HorrorGirl").GetComponent<GhostScript_NoPoint>().FoundTarget(LightON);
         }
-        if(Input.GetKeyDown("2")){
+        if(Input.GetKeyDown("2")){ //UVLIght 작동 
             if (num != 2){
                 transform.GetChild(0).GetComponent<Light>().enabled = false;
                 transform.GetChild(1).GetComponent<Light>().enabled = true;

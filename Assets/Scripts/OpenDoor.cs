@@ -44,6 +44,8 @@ public class OpenDoor : MonoBehaviour {
 		{
 			open = !open;
 			click = true;
+            PlayerScript.attention_level += 25;
+            Debug.Log("어그로 수치: " + PlayerScript.attention_level);
 		}
 		
 		if (Input.GetKeyDown(KeyCode.F) && enter)
@@ -54,8 +56,6 @@ public class OpenDoor : MonoBehaviour {
 		if (click == true)
         {
 			click = false;
-			PlayerScript.attention_level += 25;
-			Debug.Log("어그로 수치: " + PlayerScript.attention_level);
 		}
 	}
 

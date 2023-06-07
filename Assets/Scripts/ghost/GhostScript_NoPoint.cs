@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-
+using UnityEngine.UI;
 
 //Navigation을 사용해서 적에게 달려 간다.
 //적에게 가다가 숨으면 잠시 멈췄다가 움직인다.

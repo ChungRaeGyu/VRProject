@@ -791,9 +791,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 591301038}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.49544334, y: -0.49579948, z: 0.5}
-  m_LocalScale: {x: 5, y: 0.6666667, z: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.49999952, y: -0.5, z: 0.5}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1341863356}
@@ -2420,6 +2420,7 @@ GameObject:
   - component: {fileID: 1341863359}
   - component: {fileID: 1341863363}
   - component: {fileID: 1341863364}
+  - component: {fileID: 1341863365}
   m_Layer: 0
   m_Name: DoorModel
   m_TagString: Untagged
@@ -2539,11 +2540,30 @@ MonoBehaviour:
   _constraints:
     MinAngle:
       Constrain: 1
-      Value: -120
+      Value: 100
     MaxAngle:
       Constrain: 1
-      Value: 0
+      Value: -60
 --- !u!114 &1341863364
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1341863355}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43f86b14a27b52f4f9298c33015b5c26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _transferOnSecondSelection: 0
+  _addNewPointsToFront: 0
+  _forwardElement: {fileID: 0}
+  _oneGrabTransformer: {fileID: 1341863363}
+  _twoGrabTransformer: {fileID: 0}
+  _targetTransform: {fileID: 591301039}
+  _maxGrabPoints: -1
+--- !u!114 &1341863365
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2558,7 +2578,7 @@ MonoBehaviour:
   m_allowOffhandGrab: 1
   m_snapPosition: 0
   m_snapOrientation: 0
-  m_snapOffset: {fileID: 591301039}
+  m_snapOffset: {fileID: 0}
   m_grabPoints: []
 --- !u!1 &1370514245
 GameObject:

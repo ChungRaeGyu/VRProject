@@ -29,9 +29,9 @@ public class PlayerScript : MonoBehaviour
     private int buttonInt = 0;
     private bool invenClick = false;
 
-    public GameObject UIImage;
-    public GameObject HealthImage;
-    public Text HealthItem;
+    //public GameObject UIImage;
+    //public GameObject HealthImage;
+    //public Text HealthItem;
 
     // Start is called before the first frame update
     void Start()
@@ -83,7 +83,7 @@ public class PlayerScript : MonoBehaviour
 
         int HealthItemNum = Inventory.HelingItemNum;
 
-        HealthItem.text = "치료제: " + HealthItemNum.ToString();
+        //HealthItem.text = "치료제: " + HealthItemNum.ToString();
 
 
 
@@ -109,25 +109,25 @@ public class PlayerScript : MonoBehaviour
         }
         */
 
-        if (OVRInput.GetDown(OVRInput.Button.One, OVRInput.Controller.LTouch))
-        {
-            if (invenClick == false)
-            {
-                Debug.Log("왼쪽 UI 나와라");
-                UIImage.GetComponent<Image>().enabled = true;
-                HealthImage.GetComponent<Image>().enabled = true;
-                HealthItem.GetComponent<Text>().enabled = true;
-                invenClick = true;
-            }
-            else if (invenClick == true)
-            {
-                Debug.Log("왼쪽 UI 사라져");
-                UIImage.GetComponent<Image>().enabled = false;
-                HealthImage.GetComponent<Image>().enabled = false;
-                HealthItem.GetComponent<Text>().enabled = false;
-                invenClick = false;
-            }
-        }
+        //if (OVRInput.GetDown(OVRInput.Button.One, OVRInput.Controller.LTouch))
+        //{
+        //    if (invenClick == false)
+        //    {
+        //        Debug.Log("왼쪽 UI 나와라");
+        //        UIImage.GetComponent<Image>().enabled = true;
+        //        HealthImage.GetComponent<Image>().enabled = true;
+        //        HealthItem.GetComponent<Text>().enabled = true;
+        //        invenClick = true;
+        //    }
+        //    else if (invenClick == true)
+        //    {
+        //        Debug.Log("왼쪽 UI 사라져");
+        //        UIImage.GetComponent<Image>().enabled = false;
+        //        HealthImage.GetComponent<Image>().enabled = false;
+        //        HealthItem.GetComponent<Text>().enabled = false;
+        //        invenClick = false;
+        //    }
+        //}
 
         if (OVRInput.GetDown(OVRInput.Button.One, OVRInput.Controller.RTouch))
         {

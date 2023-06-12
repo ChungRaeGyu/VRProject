@@ -17,7 +17,7 @@ public class InventoryVR : MonoBehaviour
 
     private void Update()
     {
-        if (OVRInput.GetDown(OVRInput.Button.Four))
+        if (OVRInput.GetDown(OVRInput.Button.Three))
         {
             UIActive = !UIActive;
             Inventory.SetActive(UIActive);

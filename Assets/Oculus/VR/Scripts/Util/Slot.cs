@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -16,7 +14,7 @@ public class Slot : MonoBehaviour
         originalColor = slotImage.color;
     }
 
-    private void OnTriggerEnter(Collider coll)
+    private void OnTriggerStay(Collider coll)
     {
         if (ItemInSlot != null) return;
         GameObject obj = coll.gameObject;

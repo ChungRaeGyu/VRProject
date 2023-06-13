@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,15 +11,15 @@ public class Slot : MonoBehaviour
     void Start()
     {
         slotImage = GetComponentInChildren<Image>();
-        originalColor = slotImage.color;
+        originalColor = slotImage.color;//new Color(92, 243, 255, 255);
     }
 
-    private void OnTriggerEnter(Collider coll)
+    private void OnTriggerStay(Collider coll)
     {
         if (ItemInSlot != null) return;
         GameObject obj = coll.gameObject;
         if (!IsItem(obj)) return;
-        if(OVRInput.GetUp(OVRInput.Button.SecondaryHandTrigger))
+        if (OVRInput.GetUp(OVRInput.Button.SecondaryHandTrigger))
         {
             InsertItem(obj);
         }
@@ -34,6 +32,14 @@ public class Slot : MonoBehaviour
 
     void InsertItem(GameObject obj)
     {
+        if (ItemInSlot != null)
+        {
+            ItemInSlot.GetComponentInParent<Slot>().ItemInSlot = null;
+            ItemInSlot.transform.SetParent(null);
+            ItemInSlot.GetComponent<Inventory>().inSlot = false;
+            ItemInSlot.GetComponent<Inventory>().currentSlot.ResetColor();
+            ItemInSlot.GetComponent<Inventory>().currentSlot = null;
+        }
         obj.GetComponent<Rigidbody>().isKinematic = true;
         obj.transform.SetParent(gameObject.transform, true);
         obj.transform.localPosition = Vector3.zero;

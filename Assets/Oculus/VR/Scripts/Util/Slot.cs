@@ -35,14 +35,14 @@ public class Slot : MonoBehaviour
 
     void InsertItem(GameObject obj)
     {
-        if (ItemInSlot != null)
-        {
-            ItemInSlot.GetComponentInParent<Slot>().ItemInSlot = null;
-            ItemInSlot.transform.SetParent(null);
-            ItemInSlot.GetComponent<Inventory>().inSlot = false;
-            ItemInSlot.GetComponent<Inventory>().currentSlot.ResetColor();
-            ItemInSlot.GetComponent<Inventory>().currentSlot = null;
-        }
+        //if (ItemInSlot != null)
+        //{
+        //    ItemInSlot.GetComponentInParent<Slot>().ItemInSlot = null;
+        //    ItemInSlot.transform.SetParent(null);
+        //    ItemInSlot.GetComponent<Inventory>().inSlot = false;
+        //    ItemInSlot.GetComponent<Inventory>().currentSlot.ResetColor();
+        //    ItemInSlot.GetComponent<Inventory>().currentSlot = null;
+        //}
         obj.GetComponent<Rigidbody>().isKinematic = true;
         obj.transform.SetParent(gameObject.transform, true);
         obj.transform.localPosition = Vector3.zero;

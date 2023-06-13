@@ -4,18 +4,7 @@ using UnityEngine;
 
 public class Item : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    GameObject obj;
     IEnumerator UseHealth()
     {
         PlayerScript.PlayerHP += 1;
@@ -23,4 +12,20 @@ public class Item : MonoBehaviour
         yield return null;
     }
 
+    private void OnTriggerStay(Collider coll)
+    {
+        if(coll.tag == "Item")
+        {
+            obj = coll.gameObject;
+            if (OVRInput.GetDown(OVRInput.Button.Two))
+            {
+                
+                StartCoroutine(UseHealth());
+            }
+        }
+        else if(coll == null)
+        {
+            return;
+        }
+    }
 }

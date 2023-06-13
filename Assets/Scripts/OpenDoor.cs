@@ -40,7 +40,7 @@ public class OpenDoor : MonoBehaviour {
 			transform.eulerAngles = Vector3.Slerp (transform.eulerAngles, defaultRot, Time.deltaTime * smooth);
 
 		}
-		if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch) && enter)
+		if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger) || OVRInput.GetDown(OVRInput.Button.SecondaryIndexTrigger) && enter)
 		{
 			open = !open;
 			click = true;
@@ -64,7 +64,7 @@ public class OpenDoor : MonoBehaviour {
 		if (col.tag == "Player") {
 			enter = true;
 		}
-		}
+	}
 
     void OnTriggerExit(Collider col)
 {

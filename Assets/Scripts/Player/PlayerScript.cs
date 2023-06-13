@@ -81,7 +81,7 @@ public class PlayerScript : MonoBehaviour
             }
         }
 
-        int HealthItemNum = Inventory.HelingItemNum;
+        //int HealthItemNum = Inventory.HelingItemNum;
 
         //HealthItem.text = "Ä¡·áÁ¦: " + HealthItemNum.ToString();
 

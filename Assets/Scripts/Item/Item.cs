@@ -15,21 +15,12 @@ public class Item : MonoBehaviour
     {
         
     }
-    //test
-    private void OnTriggerEnter(Collider coll)
+
+    IEnumerator UseHealth()
     {
-        if(coll.tag == "GameController")
-        {
-            Destroy(gameObject);
-            Inventory.HelingItemNum += 1;
-            return;
-        }
-        if (coll.tag == "GameControllerL")
-        {
-            Destroy(gameObject);
-            Inventory.HelingItemNum += 1;
-            return;
-        }
+        PlayerScript.PlayerHP += 1;
+        Debug.Log(PlayerScript.PlayerHP);
+        yield return null;
     }
 
 }

@@ -19,9 +19,12 @@ public class Slot : MonoBehaviour
         if (ItemInSlot != null) return;
         GameObject obj = coll.gameObject;
         if (!IsItem(obj)) return;
-        if (OVRInput.GetUp(OVRInput.Button.SecondaryHandTrigger))
+        if(coll.tag == "GameController")
         {
-            InsertItem(obj);
+            if (OVRInput.GetUp(OVRInput.Button.SecondaryHandTrigger))
+            {
+                InsertItem(obj);
+            }
         }
     }
 

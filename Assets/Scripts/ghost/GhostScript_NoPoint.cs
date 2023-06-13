@@ -12,7 +12,7 @@ public class GhostScript_NoPoint : MonoBehaviour
     public bool targetCheck = false;
     private NavMeshAgent nav;
     //-------------------------------------------------------추적
-    float timer = 10.0f;
+    float timer = 15.0f;
     float time;
     public Transform Player;
     public float playerDistance = 10f;
@@ -70,7 +70,7 @@ public class GhostScript_NoPoint : MonoBehaviour
                 time += Time.deltaTime;
                 if (time > timer)
                 {
-                    //StartCoroutine(lost(false)); //플레이어를 놓치면 잠깐 멈춤
+                    StartCoroutine(lost(false)); //플레이어를 놓치면 잠깐 멈춤
                     time = 0;
                 }
 
@@ -91,7 +91,7 @@ public class GhostScript_NoPoint : MonoBehaviour
                 if (first)
                 {
                     first = false;
-                    //StartCoroutine(Fadeout());
+                    StartCoroutine(Fadeout());
                 }
             }
         }else{
@@ -139,7 +139,7 @@ public class GhostScript_NoPoint : MonoBehaviour
     }
     //PlayerScript에서 사용
     public void PlayerDIeAction(){
-        diestart=true; //한번만 하기 위한 값
+        diestart=true; //한번만 하기 위한 값d
         
         StartCoroutine(Fadein(1));
         SpotlightController light = GameObject.Find("SpotlightController").GetComponent<SpotlightController>();
@@ -219,7 +219,7 @@ public class GhostScript_NoPoint : MonoBehaviour
     IEnumerator lost(bool check)
     {
         nav.ResetPath(); //navigation을 초기화 한다.
-        playerDistance = 1000f;
+        //playerDistance = 1000f;
         Debug.Log("잃어버렸다..");
         PlayerScript.attention_level = 0; //어그로 수치를 0으로 만든다.
         yield return new WaitForSecondsRealtime(3f);

@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Item : MonoBehaviour
 {
-    GameObject obj;
     IEnumerator UseHealth()
     {
         PlayerScript.PlayerHP += 1;
@@ -14,18 +13,14 @@ public class Item : MonoBehaviour
 
     private void OnTriggerStay(Collider coll)
     {
-        if(coll.tag == "Item")
+        if(coll.gameObject.tag == "Item")
         {
-            obj = coll.gameObject;
             if (OVRInput.GetDown(OVRInput.Button.Two))
             {
-                
                 StartCoroutine(UseHealth());
+                Destroy(coll.gameObject);
             }
         }
-        else if(coll == null)
-        {
-            return;
-        }
+        
     }
 }

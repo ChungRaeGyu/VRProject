@@ -2935,9 +2935,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   test: 0
   num: 0
-  UIImage: {fileID: 2090847471}
-  HealthImage: {fileID: 0}
-  HealthItem: {fileID: 571657166}
 --- !u!114 &1437911382
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2950,6 +2947,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a943e7c56e05a9442b609639680c308a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  inSlot: 0
+  sloRotation: {x: 0, y: 0, z: 0}
+  currentSlot: {fileID: 0}
 --- !u!1 &1458372137
 GameObject:
   m_ObjectHideFlags: 0

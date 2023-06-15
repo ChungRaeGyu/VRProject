@@ -11,6 +11,9 @@ TagManager:
   - InputField
   - ItemImage
   - GameControllerL
+  - Menu
+  - BackButton
+  - Cutter
   layers:
   - Default
   - TransparentFX

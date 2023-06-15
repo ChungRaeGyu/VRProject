@@ -8,6 +8,7 @@ public class FlashLight : MonoBehaviour
     Ligth 오브젝트에 넣는다.
     */
     int num;
+    bool uvLight = false;
     public bool LightON=false;
     // Start is called before the first frame update
     void Start()
@@ -19,34 +20,69 @@ public class FlashLight : MonoBehaviour
     void Update()
     { //VR컨트롤러 키를 넣으면 된다.
     
-        if(OVRInput.GetDown(OVRInput.Button.One, OVRInput.Controller.RTouch))
-        {
-            if (num != 1){
-                transform.GetChild(0).GetComponent<Light>().enabled=true;
+        //if(OVRInput.GetDown(OVRInput.Button.One) && uvLight == false)
+        //{
+        //    if (num != 1){
+        //        transform.GetChild(0).GetComponent<Light>().enabled=true;
+        //        transform.GetChild(1).GetComponent<Light>().enabled = false;
+        //        num=1;
+        //        LightON=true;
+        //    }else if (num == 1){
+        //        transform.GetChild(0).GetComponent<Light>().enabled = false;
+        //        num=0;
+        //        LightON=false;
+        //    }
+        //    uvLight = true;
+        //    if (!LightON)
+        //        GameObject.Find("HorrorGirl").GetComponent<GhostScript_NoPoint>().FoundTarget(LightON);
+        //}
+        //if(OVRInput.GetDown(OVRInput.Button.One) && uvLight == true)
+        //{ //UVLIght 작동 
+        //    if (num != 2){
+        //        transform.GetChild(0).GetComponent<Light>().enabled = false;
+        //        transform.GetChild(1).GetComponent<Light>().enabled = true;
+        //        num=2;
+        //        LightON=true;
+        //    }else if(num==2){
+        //        transform.GetChild(1).GetComponent<Light>().enabled = false;
+        //        num=0;
+        //        LightON=false;
+        //    }
+        //    uvLight = false;
+        //    if (!LightON)
+        //    GameObject.Find("HorrorGirl").GetComponent<GhostScript_NoPoint>().FoundTarget(LightON);
+        //}
+
+        if (OVRInput.GetDown(OVRInput.Button.One))
+        { //UVLIght 작동
+            if (num == 0)
+            {
+                transform.GetChild(0).GetComponent<Light>().enabled = true;
                 transform.GetChild(1).GetComponent<Light>().enabled = false;
-                num=1;
-                LightON=true;
-            }else if (num == 1){
-                transform.GetChild(0).GetComponent<Light>().enabled = false;
-                num=0;
-                LightON=false;
+                LightON = true;
+                num = 1;
+                Debug.Log("0");
+                return;
             }
-            if(!LightON)
-                GameObject.Find("HorrorGirl").GetComponent<GhostScript_NoPoint>().FoundTarget(LightON);
-        }
-        if(Input.GetKeyDown("2")){ //UVLIght 작동 
-            if (num != 2){
+            else if (num == 1)
+            {
                 transform.GetChild(0).GetComponent<Light>().enabled = false;
                 transform.GetChild(1).GetComponent<Light>().enabled = true;
-                num=2;
-                LightON=true;
-            }else if(num==2){
+                LightON = true;
+                num = 2;
+                Debug.Log("1");
+                return;
+            }
+            else if (num == 2)
+            {
                 transform.GetChild(1).GetComponent<Light>().enabled = false;
-                num=0;
-                LightON=false;
+                LightON = false;
+                num = 0;
+                Debug.Log("2");
+                return;
             }
             if (!LightON)
-            GameObject.Find("HorrorGirl").GetComponent<GhostScript_NoPoint>().FoundTarget(LightON);
+                GameObject.Find("HorrorGirl").GetComponent<GhostScript_NoPoint>().FoundTarget(LightON);
         }
     }   
 }

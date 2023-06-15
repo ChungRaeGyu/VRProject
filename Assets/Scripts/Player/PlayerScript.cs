@@ -36,12 +36,13 @@ public class PlayerScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        attention_level = test;
+        
     }
 
     // Update is called once per frame
     void Update()
     {
+        attention_level = test;
         num=attention_level;
         if (PlayerHP <= 0&&PlayerDie==false)
         {
@@ -71,7 +72,7 @@ public class PlayerScript : MonoBehaviour
             timer+=Time.deltaTime;
         }
         //어그로 수치를 5초당 1씩 줄어들게 한다.
-        if(attention_level!=0&&attention_level>=100){
+        if(attention_level>0&&attention_level<100){
             decreaseTimer -= Time.deltaTime;
             if(decreaseTimer<=0)
             {

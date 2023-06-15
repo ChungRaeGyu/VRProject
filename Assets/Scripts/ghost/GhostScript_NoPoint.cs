@@ -126,6 +126,7 @@ public class GhostScript_NoPoint : MonoBehaviour
     }
     public void over50per(){ //정신력 수치가 50퍼 이상일 때
         nav.enabled=false;
+        rigid.useGravity=false;
         over50perSound.Play();
         //플레이어의 뒤에 그리고 90도로 사라지기 
         GameObject Playertr = GameObject.Find("OVRPlayerController");
@@ -136,6 +137,7 @@ public class GhostScript_NoPoint : MonoBehaviour
         transform.rotation = newRotation;
         rigid.velocity = transform.forward * 1.5f;
         StartCoroutine(velocity0());
+        
     }
     //PlayerScript에서 사용
     public void PlayerDIeAction(){
@@ -241,6 +243,7 @@ public class GhostScript_NoPoint : MonoBehaviour
             Debug.Log("추적시작");
             targetCheck = true;
             first=true;
+            rigid.useGravity=true;
             nav.enabled = true;
             anim.SetBool("walk",true);
         }

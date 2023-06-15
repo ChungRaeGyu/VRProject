@@ -85,7 +85,7 @@ public class GhostScript_NoPoint : MonoBehaviour
                
             }
             else
-            {
+            { 
                 //플레이어를 놓치면 사라진다.
                 //first는 한번만 실행하기 위한 것이다.
                 if (first)
@@ -219,6 +219,7 @@ public class GhostScript_NoPoint : MonoBehaviour
     IEnumerator lost(bool check)
     {
         nav.ResetPath(); //navigation을 초기화 한다.
+        anim.SetBool("walk", false);
         playerDistance = 1000f;
         Debug.Log("잃어버렸다..");
         PlayerScript.attention_level = 0; //어그로 수치를 0으로 만든다.
@@ -237,11 +238,12 @@ public class GhostScript_NoPoint : MonoBehaviour
     public void setDirection(Vector3 target)
     {
         if(targetCheck==false){
-        Debug.Log("추적시작");
-        targetCheck = true;
-        first=true;
+            Debug.Log("추적시작");
+            targetCheck = true;
+            first=true;
+            nav.enabled = true;
+            anim.SetBool("walk",true);
         }
-        nav.enabled = true;
         nav.SetDestination(target);
     }
     

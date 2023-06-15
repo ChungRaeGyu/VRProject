@@ -41,7 +41,8 @@ public class ColorPuzzle : MonoBehaviour
         }
     }
     public void changeColor2()
-    {Debug.Log("두번쨰 블럭");
+    {
+        Debug.Log("두번쨰 블럭");
         ImageColor[1].color = Sample[b];
         
         if(b==1){

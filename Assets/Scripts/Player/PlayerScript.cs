@@ -36,13 +36,12 @@ public class PlayerScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        attention_level = test;
     }
 
     // Update is called once per frame
     void Update()
     {
-        num=attention_level;
+        attention_level =num;
         if (PlayerHP <= 0&&PlayerDie==false)
         {
             //시점 전환 
@@ -57,7 +56,8 @@ public class PlayerScript : MonoBehaviour
         //어그로 수치 관련~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         //어그로수치가 100이상 되면 추적시작
         if (attention_level >= 100)
-        {
+        {   
+
             //추적시작
             GameObject.Find("HorrorGirl").GetComponent<GhostScript_NoPoint>().setDirection(transform.position);
         }
@@ -71,7 +71,7 @@ public class PlayerScript : MonoBehaviour
             timer+=Time.deltaTime;
         }
         //어그로 수치를 5초당 1씩 줄어들게 한다.
-        if(attention_level!=0&&attention_level>=100){
+        if(attention_level!=0&&attention_level<100){
             decreaseTimer -= Time.deltaTime;
             if(decreaseTimer<=0)
             {

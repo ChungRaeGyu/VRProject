@@ -9,7 +9,9 @@ public class PlayerScript : MonoBehaviour
     /// <summary>
     /// 플레이어 죽음, 컨트롤러 클릭 관련 cs 파일
     /// </summary>
-    public static int PlayerHP = 3;
+    public static int PlayerHP = 2;
+    Image[] HealthImage;
+    public bool attacked=false;
     //어그로 수치 관련 {
     public static float attention_level; //어그로 수치
     public float test;
@@ -30,13 +32,12 @@ public class PlayerScript : MonoBehaviour
     private bool invenClick = false;
 
     //public GameObject UIImage;
-    //public GameObject HealthImage;
     //public Text HealthItem;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        HealthImage = GameObject.Find("Canvas(hp)").GetComponentsInChildren<Image>();
     }
 
     // Update is called once per frame
@@ -44,7 +45,7 @@ public class PlayerScript : MonoBehaviour
     {
         attention_level = test;
         num=attention_level;
-        if (PlayerHP <= 0&&PlayerDie==false)
+        if (PlayerHP < 0&&PlayerDie==false)
         {
             //시점 전환 
             GameObject.Find("Main Camera").GetComponent<Camera>().enabled = false;
@@ -81,7 +82,13 @@ public class PlayerScript : MonoBehaviour
                 decreaseTimer=5f;
             }
         }
-
+        //여기를 몬스터와 부딪혔을 때로 바꾼다.
+        if(attacked==true){
+            Debug.Log("맞음");
+            HealthImage[PlayerHP].enabled=false;
+            attacked=false;
+            PlayerHP--;
+        }
         //int HealthItemNum = Inventory.HelingItemNum;
 
         //HealthItem.text = "치료제: " + HealthItemNum.ToString();
@@ -134,6 +141,5 @@ public class PlayerScript : MonoBehaviour
         {
             //Debug.Log(Inventory.HelingItemNum);
         }
-
     }
 }

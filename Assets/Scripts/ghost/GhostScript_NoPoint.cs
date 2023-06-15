@@ -60,7 +60,6 @@ public class GhostScript_NoPoint : MonoBehaviour
         if(!diestart){
             if (targetCheck)
             {
-                //anim.SetFloat("speed",rigid.velocity.magnitude);
                 if (first)
                 {
                     first = false;

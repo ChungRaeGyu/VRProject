@@ -1,0 +1,34 @@
+
+Dilute your game with this wonderful set of keys,locks and doors, created specifically for your horror, RPG or quest games.
+
+Each part of the asset is located in the folder of the same name:"Keys","Locks" and "Doors".The "Keys" folder is divided into three parts: "First part", "Second Part" and "Third part", respectively. This separation is made for your convenience, so that you do not get confused in navigation.
+
+
+Keys
+
+Each part has its own set of textures (512 and 1024). The textures are optimized and for each model, in this asset there are only 1 Metallic/ Smoothness texture as well as Normal, and 3 different Albedo textures: Gold, Steel and Bronze.
+
+
+Locks
+
+Each lock has its own set of textures, 1024 and 2048 (1 Metallic/Smoothness and Normal texture, + 2 different Albedo textures: Gold and Steel). All locks can be interactive.
+Combine different doors and locks and create your own style!
+
+Doors
+
+Textures are 2048. All doors can be interactive.
+
+Sounds
+
+3 sounds of 'key opening' and 1 sound of 'door opening'.
+
+Even more content!
+This asset will be periodically updated (price will be increasing as well), so stay tuned!
+
+
+All meshes are low-poly and optimized
+
+Each part of keys has 400 to 1000 triangles.
+Each lock  has 1300 to 1500 triangles.
+Each door  has 400 to 1800 triangles.
+

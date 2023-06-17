@@ -11,17 +11,17 @@ public class PlayerScript : MonoBehaviour
     /// </summary>
     public static int PlayerHP = 2;
     public Image[] HealthImage;
-    public bool attacked=false;
+    public bool attacked;
     //��׷� ��ġ ���� {
     public static float attention_level; //��׷� ��ġ
     public float test;
     public float num;
     //��׷ΰ� 0�� �ƴҶ� ��������ŭ ��ġ�� ����߸��� ���� ��
-    float decreaseTimer=5f;
-    float decreaseAmount = 1;
+    float decreaseTimer;
+    float decreaseAmount;
     //��׷� ��ġ�� 50�� �̻��϶� �ͽ��� ���� ������ �ϱ� ���� ���̴�.
     float timer;
-    float settime = 5f;
+    float settime;
 
     //}
     public static bool PlayerDie = false;
@@ -38,6 +38,12 @@ public class PlayerScript : MonoBehaviour
     void Start()
     {
         HealthImage = GameObject.Find("Canvas(hp)").GetComponentsInChildren<Image>();
+        drawHealth();
+        attacked=false;
+        decreaseAmount=1;
+        decreaseTimer=5;
+        settime=5;
+        timer=0;
     }
 
     // Update is called once per frame

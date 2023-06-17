@@ -12,7 +12,7 @@ public class GhostScript_NoPoint : MonoBehaviour
     public bool targetCheck = false;
     private NavMeshAgent nav;
     //-------------------------------------------------------추적
-    float timer = 10.0f;
+    float timer = 20.0f;
     float time;
     public Transform Player;
     public float playerDistance = 1f;
@@ -30,7 +30,7 @@ public class GhostScript_NoPoint : MonoBehaviour
     bool first = true; //한번만 실행하기 위한
     //--------------------------------------------------------die
     public bool diestart=false; //정신력이 0이 되었을 때 //그냥 static으로 써버리고 해도 될듯?
-    bool die=true;
+
     //--------------------------------------------Anim
     Animator anim;
     //-------------------------------------------------ghost audio
@@ -70,7 +70,7 @@ public class GhostScript_NoPoint : MonoBehaviour
                 time += Time.deltaTime;
                 if (time > timer)
                 {
-                    //StartCoroutine(lost(false)); //플레이어를 놓치면 잠깐 멈춤
+                    StartCoroutine(lost(false)); //플레이어를 놓치면 잠깐 멈춤 빼버릴까
                     time = 0;
                 }
 
@@ -97,11 +97,10 @@ public class GhostScript_NoPoint : MonoBehaviour
         }
     }
     IEnumerator catchPlayer(bool check){
-        
+        targetCheck = check;  //기본 움직임을 실행시킨다.
         nav.ResetPath(); //navigation을 초기화 한다.
         anim.SetBool("walk", false);     
         PlayerScript.attention_level = 0; //어그로 수치를 0으로 만든다.
-        targetCheck = check;  //기본 움직임을 실행시킨다.
         first = true;
         time = 0;
         Player.GetComponent<PlayerScript>().attacked = true;
@@ -233,8 +232,8 @@ public class GhostScript_NoPoint : MonoBehaviour
         anim.SetBool("walk", false);
         Debug.Log("잃어버렸다..");
         PlayerScript.attention_level = 0; //어그로 수치를 0으로 만든다.
-        yield return null;
-        targetCheck = check;  //기본 움직임을 실행시킨다.
+        yield return new WaitForSecondsRealtime(3f);
+        targetCheck = check;  //기본 움직임을 실행시킨다. 
         first=true;
         time = 0;
     }

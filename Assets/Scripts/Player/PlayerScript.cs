@@ -7,19 +7,19 @@ using OVR;
 public class PlayerScript : MonoBehaviour
 {
     /// <summary>
-    /// ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½Æ®ï¿½Ñ·ï¿½ Å¬ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ cs ï¿½ï¿½ï¿½ï¿½
+    /// ÇÃ·¹ÀÌ¾î Á×À½, ÄÁÆ®·Ñ·¯ Å¬¸¯ °ü·Ã cs ÆÄÀÏ
     /// </summary>
     public static int PlayerHP = 2;
     Image[] HealthImage;
     public bool attacked=false;
-    //ï¿½ï¿½×·ï¿½ ï¿½ï¿½Ä¡ ï¿½ï¿½ï¿½ï¿½ {
-    public static float attention_level; //ì–´ê·¸ë¡œ ìˆ˜ì¹˜
+    //¾î±×·Î ¼öÄ¡ °ü·Ã {
+    public static float attention_level; //¾î±×·Î ¼öÄ¡
     public float test;
     public float num;
-    //ì–´ê·¸ë¡œ ìˆ˜ì¹˜ ê°ì†Œ
+    //¾î±×·Î°¡ 0ÀÌ ¾Æ´Ò¶§ ÀÏÁ¤·®¸¸Å­ ¼öÄ¡¸¦ ¶³¾î¶ß¸®±â À§ÇÑ °ª
     float decreaseTimer=5f;
     float decreaseAmount = 1;
-    //ê°€ë” ë‚˜íƒ€ë‚˜ê²Œ í•˜ê¸° ìœ„í•œ ì‹œê°„
+    //¾î±×·Î ¼öÄ¡°¡ 50ÆÛ ÀÌ»óÀÏ¶§ ±Í½ÅÀÌ °¡²û ³ª¿À°Ô ÇÏ±â À§ÇÑ °ÍÀÌ´Ù.
     float timer;
     float settime = 5f;
 
@@ -37,7 +37,6 @@ public class PlayerScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        attacked = false;
         HealthImage = GameObject.Find("Canvas(hp)").GetComponentsInChildren<Image>();
     }
 
@@ -48,20 +47,20 @@ public class PlayerScript : MonoBehaviour
         num=attention_level;
         if (PlayerHP < 0&&PlayerDie==false)
         {
-            //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½È¯ 
+            //½ÃÁ¡ ÀüÈ¯ 
             GameObject.Find("Main Camera").GetComponent<Camera>().enabled = false;
             GameObject.Find("Main Camera").GetComponent<AudioListener>().enabled = false;
             GameObject.Find("CatchCamera").GetComponent<Camera>().enabled = true;
             GameObject.Find("CatchCamera").GetComponent<AudioListener>().enabled = true;
-            GameObject.Find("HorrorGirl").GetComponent<GhostScript_NoPoint>().PlayerDIeAction(); //ï¿½ï¿½ï¿½ï¿½È¿ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+            GameObject.Find("HorrorGirl").GetComponent<GhostScript_NoPoint>().PlayerDIeAction(); //Á¡¸êÈ¿°úÀÇ ½ÃÀÛ
             PlayerDie = true;
             return;
         }
-        //ï¿½ï¿½×·ï¿½ ï¿½ï¿½Ä¡ ï¿½ï¿½ï¿½ï¿½~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-        //ï¿½ï¿½×·Î¼ï¿½Ä¡ï¿½ï¿½ 100ï¿½Ì»ï¿½ ï¿½Ç¸ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+        //¾î±×·Î ¼öÄ¡ °ü·Ã~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        //¾î±×·Î¼öÄ¡°¡ 100ÀÌ»ó µÇ¸é ÃßÀû½ÃÀÛ
         if (attention_level >= 100)
         {
-            //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+            //ÃßÀû½ÃÀÛ
             GameObject.Find("HorrorGirl").GetComponent<GhostScript_NoPoint>().setDirection(transform.position);
         }
         else if(attention_level>=50){
@@ -73,25 +72,26 @@ public class PlayerScript : MonoBehaviour
             }
             timer+=Time.deltaTime;
         }
-        //ï¿½ï¿½×·ï¿½ ï¿½ï¿½Ä¡ï¿½ï¿½ 5ï¿½Ê´ï¿½ 1ï¿½ï¿½ ï¿½Ù¾ï¿½ï¿½ï¿½ ï¿½Ñ´ï¿½.
+        //¾î±×·Î ¼öÄ¡¸¦ 5ÃÊ´ç 1¾¿ ÁÙ¾îµé°Ô ÇÑ´Ù.
         if(attention_level>0&&attention_level<100){
             decreaseTimer -= Time.deltaTime;
             if(decreaseTimer<=0)
             {
                 attention_level-=decreaseAmount;
-                Debug.Log("ï¿½ï¿½ï¿½ï¿½");
+                Debug.Log("°¨¼Ò");
                 decreaseTimer=5f;
             }
         }
-        //ï¿½ï¿½ï¿½â¸¦ ï¿½ï¿½ï¿½Í¿ï¿½ ï¿½Îµï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ù²Û´ï¿½.
+        //¿©±â¸¦ ¸ó½ºÅÍ¿Í ºÎµúÇûÀ» ¶§·Î ¹Ù²Û´Ù.
         if(attacked==true){
+            Debug.Log("¸ÂÀ½");
             HealthImage[PlayerHP].enabled=false;
             attacked=false;
             PlayerHP--;
         }
         //int HealthItemNum = Inventory.HelingItemNum;
 
-        //HealthItem.text = "Ä¡ï¿½ï¿½ï¿½ï¿½: " + HealthItemNum.ToString();
+        //HealthItem.text = "Ä¡·áÁ¦: " + HealthItemNum.ToString();
 
 
 
@@ -121,7 +121,7 @@ public class PlayerScript : MonoBehaviour
         //{
         //    if (invenClick == false)
         //    {
-        //        Debug.Log("ï¿½ï¿½ï¿½ï¿½ UI ï¿½ï¿½ï¿½Í¶ï¿½");
+        //        Debug.Log("¿ŞÂÊ UI ³ª¿Í¶ó");
         //        UIImage.GetComponent<Image>().enabled = true;
         //        HealthImage.GetComponent<Image>().enabled = true;
         //        HealthItem.GetComponent<Text>().enabled = true;
@@ -129,7 +129,7 @@ public class PlayerScript : MonoBehaviour
         //    }
         //    else if (invenClick == true)
         //    {
-        //        Debug.Log("ï¿½ï¿½ï¿½ï¿½ UI ï¿½ï¿½ï¿½ï¿½ï¿½");
+        //        Debug.Log("¿ŞÂÊ UI »ç¶óÁ®");
         //        UIImage.GetComponent<Image>().enabled = false;
         //        HealthImage.GetComponent<Image>().enabled = false;
         //        HealthItem.GetComponent<Text>().enabled = false;

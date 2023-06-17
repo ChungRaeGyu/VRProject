@@ -15,7 +15,7 @@ public class GhostScript_NoPoint : MonoBehaviour
     float timer = 10.0f;
     float time;
     public Transform Player;
-    public float playerDistance = 10f;
+    public float playerDistance = 1f;
     
     public float speed = 5.0f;  //이동 속도
     public float damping = 3.0f; //회전 시 회전 속도를 조절하는 계수
@@ -76,13 +76,11 @@ public class GhostScript_NoPoint : MonoBehaviour
 
                 //플레이어와 귀신의 거리 계산
                 float distance = Vector3.Distance(transform.position, Player.position);
-                //----------------------------------------------------------------------거리가 멀어지면 놓친다.                    
-                if (distance > playerDistance)
+                //잡았다.                  
+                if (distance < playerDistance)
                 {
-                    //Debug.Log("거리가 멀어져서 놓침");
-                    //StartCoroutine(lost(false));
+                    StartCoroutine(catchPlayer(false));
                 }
-               
             }
             else
             { 
@@ -91,12 +89,23 @@ public class GhostScript_NoPoint : MonoBehaviour
                 if (first)
                 {
                     first = false;
-                    //StartCoroutine(Fadeout());
+                    StartCoroutine(Fadeout());
                 }
             }
         }else{
             return;
         }
+    }
+    IEnumerator catchPlayer(bool check){
+        
+        nav.ResetPath(); //navigation을 초기화 한다.
+        anim.SetBool("walk", false);     
+        PlayerScript.attention_level = 0; //어그로 수치를 0으로 만든다.
+        targetCheck = check;  //기본 움직임을 실행시킨다.
+        first = true;
+        time = 0;
+        Player.GetComponent<PlayerScript>().attacked = true;
+        yield return null;
     }
     IEnumerator velocity0(){
         yield return new WaitForSecondsRealtime(2.5f);
@@ -152,7 +161,7 @@ public class GhostScript_NoPoint : MonoBehaviour
         anim.SetTrigger("lost");
         Debug.Log("사라진다");
         float elapsedTime = 0f; // 경과 시간
-        yield return new WaitForSecondsRealtime(10f);
+        yield return new WaitForSecondsRealtime(3f);
         while (elapsedTime < fadeDuration)
         {
             // 경과 시간에 따라 Alpha 값 서서히 변경
@@ -222,15 +231,12 @@ public class GhostScript_NoPoint : MonoBehaviour
     {
         nav.ResetPath(); //navigation을 초기화 한다.
         anim.SetBool("walk", false);
-        playerDistance = 1000f;
         Debug.Log("잃어버렸다..");
         PlayerScript.attention_level = 0; //어그로 수치를 0으로 만든다.
-        yield return new WaitForSecondsRealtime(3f);
+        yield return null;
         targetCheck = check;  //기본 움직임을 실행시킨다.
         first=true;
         time = 0;
-        playerDistance = 10f;
-        
     }
 
     //---------------------------------------------------------------------------------목표 추적

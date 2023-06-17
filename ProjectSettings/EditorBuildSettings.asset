@@ -9,8 +9,8 @@ EditorBuildSettings:
     path: Assets/CommunicationScene/CommunicationScene.unity
     guid: 623166c816b64a947a74feeee5b97772
   - enabled: 1
-    path: Assets/Hospital/Scenes/ShowCase 1.unity
-    guid: eccf792c326fc2844877c8e93f2af079
+    path: Assets/Scenes/MapCustom.unity
+    guid: 75d6ecdc3732e7947a0172c2c2b61a4a
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: d977aee4df579fc4baae13d61301a3b9, type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: a0cd968dfb6bc7848a490e788dda0270, type: 2}

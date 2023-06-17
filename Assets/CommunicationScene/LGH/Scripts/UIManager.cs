@@ -60,6 +60,21 @@ public class UIManager : MonoBehaviour
     public Button menuExitButton;
     public Button menuCancleButton;
 
+    public GameObject gameForm;
+    public Button newGameButton;
+    public Button loadGameButton;
+
+    public GameObject newGameForm;
+    public List<Button> newGameButtonL;
+    public List<Text> newGameTextL;
+    public Button nGF_GoToLoadGameFormButton;
+    public Button nGF_GoToBackFormButton;
+    public GameObject loadGameForm;
+    public List<Button> loadGameButtonL;
+    public List<Text> loadGameTextL;
+    public Button lGF_GoToNewGameFormButton;
+    public Button lGF_GoToBackFormButton;
+
     [System.Obsolete]
     void Start()
     {
@@ -84,6 +99,14 @@ public class UIManager : MonoBehaviour
         menuOptionButton.onClick.AddListener(OnMenuOptionButtonAct);
         menuExitButton.onClick.AddListener(OnMenuExitButtonAct);
         menuCancleButton.onClick.AddListener(OnMenuCancleButtonAct);
+
+        newGameButton.onClick.AddListener(OnNewGameButtonAct);
+        loadGameButton.onClick.AddListener(OnLoadGameButtonAct);
+
+        nGF_GoToLoadGameFormButton.onClick.AddListener(OnNGF_GoToLoadGameFormButtonAct);
+        nGF_GoToBackFormButton.onClick.AddListener(OnNGF_GoToBackFormButtonAct);
+        lGF_GoToNewGameFormButton.onClick.AddListener(OnLGF_GoToNewGameFormButtonAct);
+        lGF_GoToBackFormButton.onClick.AddListener(OnLGF_GoToBackFormButtonAct);
     }
 
     /**
@@ -116,7 +139,7 @@ public class UIManager : MonoBehaviour
 
     void OnGameStartButtonAct()
     {
-        SceneManager.LoadScene("Hospital/Scenes/ShowCase 1");
+        SceneManager.LoadScene("Scenes/MapCustom");
     }
 
     void OnMenuOptionButtonAct()
@@ -140,6 +163,42 @@ public class UIManager : MonoBehaviour
         playerScreen.SetActive(false);
 
         mainUI.SetActive(true);
+    }
+
+    void OnNewGameButtonAct()
+    {
+        gameForm.SetActive(false);
+        newGameForm.SetActive(true);
+    }
+
+    void OnLoadGameButtonAct()
+    {
+        gameForm.SetActive(false);
+        loadGameForm.SetActive(true);
+    }
+
+    void OnNGF_GoToLoadGameFormButtonAct()
+    {
+        newGameForm.SetActive(false);
+        loadGameForm.SetActive(true);
+    }
+
+    void OnNGF_GoToBackFormButtonAct()
+    {
+        gameForm.SetActive(true);
+        newGameForm.SetActive(false);
+    }
+
+    void OnLGF_GoToNewGameFormButtonAct()
+    {
+        newGameForm.SetActive(true);
+        loadGameForm.SetActive(false);
+    }
+
+    void OnLGF_GoToBackFormButtonAct()
+    {
+        gameForm.SetActive(true);
+        loadGameForm.SetActive(false);
     }
 
     /**

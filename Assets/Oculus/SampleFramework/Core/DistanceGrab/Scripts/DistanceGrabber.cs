@@ -19,6 +19,7 @@
  */
 
 
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 #if UNITY_EDITOR
@@ -142,7 +143,6 @@ namespace OculusSampleFramework
                 }
             }
         }
-
         protected override void GrabBegin()
         {
             DistanceGrabbable closestGrabbable = m_target;
@@ -175,6 +175,7 @@ namespace OculusSampleFramework
                     m_grabbedObjectPosOff = relPos;
                     Quaternion relOri = Quaternion.Inverse(transform.rotation) * m_grabbedObj.transform.rotation;
                     m_grabbedObjectRotOff = relOri;
+                    
                 }
                 else
                 {
@@ -221,7 +222,6 @@ namespace OculusSampleFramework
 
             }
         }
-
         protected override void MoveGrabbedObject(Vector3 pos, Quaternion rot, bool forceTeleport = false)
         {
             if (m_grabbedObj == null)

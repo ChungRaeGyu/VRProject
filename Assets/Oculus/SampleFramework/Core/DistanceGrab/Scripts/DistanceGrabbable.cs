@@ -45,7 +45,7 @@ namespace OculusSampleFramework
             }
         }
         bool m_inRange;
-
+        
         public bool Targeted
         {
             get { return m_targeted; }

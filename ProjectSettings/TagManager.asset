@@ -14,6 +14,7 @@ TagManager:
   - Menu
   - BackButton
   - Cutter
+  - Key
   layers:
   - Default
   - TransparentFX

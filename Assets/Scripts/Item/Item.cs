@@ -12,7 +12,6 @@ public class Item : MonoBehaviour
     {
         PlayerScript.PlayerHP += 1;
         Player.GetComponent<PlayerScript>().drawHealth();
-        Debug.Log(PlayerScript.PlayerHP);
         yield return null;
     }
 

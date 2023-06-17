@@ -5,14 +5,7 @@ public class Slot : MonoBehaviour
 {
 
     public GameObject ItemInSlot;
-    public Image slotImage;
-    Color originalColor;
     // Start is called before the first frame update
-    void Start()
-    {
-        slotImage = GetComponentInChildren<Image>();
-        originalColor = slotImage.color;//new Color(92, 243, 255, 255);
-    }
 
     private void OnTriggerStay(Collider coll)
     {
@@ -37,7 +30,6 @@ public class Slot : MonoBehaviour
             ItemInSlot.GetComponentInParent<Slot>().ItemInSlot = null;
             ItemInSlot.transform.SetParent(null);
             ItemInSlot.GetComponent<Inventory>().inSlot = false;
-            ItemInSlot.GetComponent<Inventory>().currentSlot.ResetColor();
             ItemInSlot.GetComponent<Inventory>().currentSlot = null;
         }
         obj.GetComponent<Rigidbody>().isKinematic = true;
@@ -47,12 +39,7 @@ public class Slot : MonoBehaviour
         obj.GetComponent<Inventory>().inSlot = true;
         obj.GetComponent<Inventory>().currentSlot = this;
         ItemInSlot = obj;
-        slotImage.color = Color.gray;
     }
 
-    public void ResetColor()
-    {
-        slotImage.color = originalColor;
-    }
 
 }

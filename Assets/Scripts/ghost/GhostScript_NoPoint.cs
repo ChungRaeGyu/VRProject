@@ -15,7 +15,7 @@ public class GhostScript_NoPoint : MonoBehaviour
     float timer = 20.0f;
     float time;
     public Transform Player;
-    public float playerDistance = 1f;
+    float playerDistance = 2f;
     
     public float speed = 5.0f;  //이동 속도
     public float damping = 3.0f; //회전 시 회전 속도를 조절하는 계수
@@ -29,7 +29,7 @@ public class GhostScript_NoPoint : MonoBehaviour
     //////////////////////////////////////////_--------------------------------------------
     bool first = true; //한번만 실행하기 위한
     //--------------------------------------------------------die
-    public bool diestart=false; //정신력이 0이 되었을 때 //그냥 static으로 써버리고 해도 될듯?
+    public static bool diestart=false; //정신력이 0이 되었을 때 //그냥 static으로 써버리고 해도 될듯?
 
     //--------------------------------------------Anim
     Animator anim;
@@ -79,6 +79,7 @@ public class GhostScript_NoPoint : MonoBehaviour
                 //잡았다.                  
                 if (distance < playerDistance)
                 {
+                    Debug.Log(" 거리 : " + distance);
                     StartCoroutine(catchPlayer(false));
                 }
             }
@@ -97,10 +98,11 @@ public class GhostScript_NoPoint : MonoBehaviour
         }
     }
     IEnumerator catchPlayer(bool check){
-        targetCheck = check;  //기본 움직임을 실행시킨다.
-        nav.ResetPath(); //navigation을 초기화 한다.
-        anim.SetBool("walk", false);     
         PlayerScript.attention_level = 0; //어그로 수치를 0으로 만든다.
+        nav.ResetPath(); //navigation을 초기화 한다.
+        anim.SetBool("walk", false);
+        Debug.Log("몇번 실행 되니?");
+        targetCheck = check;  //기본 움직임을 실행시킨다.
         first = true;
         time = 0;
         Player.GetComponent<PlayerScript>().attacked = true;
@@ -133,6 +135,7 @@ public class GhostScript_NoPoint : MonoBehaviour
         }
     }
     public void over50per(){ //정신력 수치가 50퍼 이상일 때
+        StartCoroutine(Fadein(1));
         nav.enabled=false;
         rigid.useGravity=false;
         over50perSound.Play();
@@ -150,8 +153,12 @@ public class GhostScript_NoPoint : MonoBehaviour
     //PlayerScript에서 사용
     public void PlayerDIeAction(){
         diestart=true; //한번만 하기 위한 값
-        
+        nav.ResetPath();    
+        Debug.Log("네비 초기화");
+        anim.SetBool("walk",false);
         StartCoroutine(Fadein(1));
+        rigid.useGravity = false;
+        nav.enabled = false;
         SpotlightController light = GameObject.Find("SpotlightController").GetComponent<SpotlightController>();
         light.StartCoroutine(light.lightout());
     }
@@ -248,7 +255,7 @@ public class GhostScript_NoPoint : MonoBehaviour
             Debug.Log("추적시작");
             targetCheck = true;
             first=true;
-            rigid.useGravity=true;
+            //rigid.useGravity=true;
             nav.enabled = true;
             anim.SetBool("walk",true);
         }

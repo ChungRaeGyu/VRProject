@@ -44,18 +44,21 @@ public class PlayerScript : MonoBehaviour
         decreaseTimer=5;
         settime=5;
         timer=0;
+        Debug.Log("시작 HP : " + PlayerHP);
+        attention_level = test;
     }
 
     // Update is called once per frame
     void Update()
     {
-        attention_level = test;
+        
         num=attention_level;
         if (PlayerHP < 0&&PlayerDie==false)
         {
+            Debug.Log("플레이어 HP" + PlayerHP);
             //���� ��ȯ 
-            GameObject.Find("Main Camera").GetComponent<Camera>().enabled = false;
-            GameObject.Find("Main Camera").GetComponent<AudioListener>().enabled = false;
+            GameObject.Find("CenterEyeAnchor").GetComponent<Camera>().enabled = false;
+            GameObject.Find("CenterEyeAnchor").GetComponent<AudioListener>().enabled = false;
             GameObject.Find("CatchCamera").GetComponent<Camera>().enabled = true;
             GameObject.Find("CatchCamera").GetComponent<AudioListener>().enabled = true;
             GameObject.Find("HorrorGirl").GetComponent<GhostScript_NoPoint>().PlayerDIeAction(); //����ȿ���� ����
@@ -66,13 +69,15 @@ public class PlayerScript : MonoBehaviour
         //��׷μ�ġ�� 100�̻� �Ǹ� ��������
         if (attention_level >= 100)
         {
-            //��������
+            if(GhostScript_NoPoint.diestart == false)
             GameObject.Find("HorrorGirl").GetComponent<GhostScript_NoPoint>().setDirection(transform.position);
         }
         else if(attention_level>=50){
             if(timer>settime){
+                Debug.Log("체크");
                 timer=0;
-                if(Random.Range(1,10)%5==0){
+                if(Random.Range(1,10)%3==0){
+                    Debug.Log("실행");
                     GameObject.Find("HorrorGirl").GetComponent<GhostScript_NoPoint>().over50per();
                 }
             }
@@ -89,6 +94,7 @@ public class PlayerScript : MonoBehaviour
         }
         //���⸦ ���Ϳ� �ε����� ���� �ٲ۴�.
         if(attacked==true){
+            Debug.Log("맞음 : " + PlayerHP);
             PlayerHP--;
             drawHealth();
             attacked = false;

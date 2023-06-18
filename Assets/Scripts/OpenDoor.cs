@@ -74,11 +74,11 @@ public class OpenDoor : MonoBehaviour {
 	}
 
 
-    IEnumerator ButtonClick()
-    {
-        open = !open;
-		PlayerScript.attention_level += 25;
-        yield return null;
-    }
+  //  IEnumerator ButtonClick()
+  //  {
+  //      open = !open;
+		//PlayerScript.attention_level += 25;
+  //      yield return null;
+  //  }
 
 }

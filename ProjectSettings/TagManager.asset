@@ -15,6 +15,7 @@ TagManager:
   - BackButton
   - Cutter
   - Key
+  - Door
   layers:
   - Default
   - TransparentFX

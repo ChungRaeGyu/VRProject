@@ -12,7 +12,7 @@ public class OpenDoor : MonoBehaviour {
 
 	private Vector3 defaultRot;
 	private Vector3 openRot;
-	private bool open;
+	public static bool open;
 	private bool enter;
 
 
@@ -40,35 +40,38 @@ public class OpenDoor : MonoBehaviour {
 
 		}
 
-		if(enter == true)
+        if (enter == true)
         {
-			if(OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger) || OVRInput.GetDown(OVRInput.Button.SecondaryIndexTrigger))
+            if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.LTouch) || OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch))
             {
-				StartCoroutine(ButtonClick());
-            }
+				open = !open;
+				PlayerScript.attention_level += 25;
+			}
         }
 
-	}
+    }
 
-	void OnTriggerStay(Collider col)
-	{
-		if (col.tag == "Player") {
-			enter = true;
-		}
-	}
+    void OnTriggerStay(Collider col)
+    {
+        if (col.tag == "Player")
+        {
+            enter = true;
+        }
+    }
 
     void OnTriggerExit(Collider col)
-{
-	if (col.tag == "Player") {
-		enter = false;
-	}
-}
-
-	IEnumerator ButtonClick()
-	{
-		open = !open;
-		PlayerScript.attention_level += 25;
-		yield return null;
+    {
+        if (col.tag == "Player")
+        {
+            enter = false;
+        }
     }
+
+    //IEnumerator ButtonClick()
+    //{
+    //    open = !open;
+    //    PlayerScript.attention_level += 25;
+    //    yield return null;
+    //}
 
 }

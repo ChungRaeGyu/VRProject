@@ -15,7 +15,6 @@ public class OpenDoor : MonoBehaviour {
 	private bool open;
 	private bool enter;
 
-	private bool click = false;
 
 	// Use this for initialization
 	void Start () {
@@ -40,26 +39,18 @@ public class OpenDoor : MonoBehaviour {
 			transform.eulerAngles = Vector3.Slerp (transform.eulerAngles, defaultRot, Time.deltaTime * smooth);
 
 		}
-		if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger) && enter || OVRInput.GetDown(OVRInput.Button.SecondaryIndexTrigger) && enter)
-		{
-			open = !open;
-			click = true;
-            PlayerScript.attention_level += 25;
-            Debug.Log("어그로 수치: " + PlayerScript.attention_level);
-		}
-		
-		if (Input.GetKeyDown(KeyCode.F) && enter)
-		{
-			open = !open;
-			click = true;
-		}
-		if (click == true)
+
+		if(enter == true)
         {
-			click = false;
-		}
+			if(OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger) || OVRInput.GetDown(OVRInput.Button.SecondaryIndexTrigger))
+            {
+				StartCoroutine(ButtonClick());
+            }
+        }
+
 	}
 
-	void OnTriggerEnter(Collider col)
+	void OnTriggerStay(Collider col)
 	{
 		if (col.tag == "Player") {
 			enter = true;
@@ -73,5 +64,11 @@ public class OpenDoor : MonoBehaviour {
 	}
 }
 
+	IEnumerator ButtonClick()
+	{
+		open = !open;
+		PlayerScript.attention_level += 25;
+		yield return null;
+    }
 
 }

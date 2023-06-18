@@ -311,6 +311,7 @@ MonoBehaviour:
   DoorOpenAngle: 90
   OpenAudio: {fileID: 0}
   CloseAudio: {fileID: 0}
+  open: 0
 --- !u!1 &1515436693840458
 GameObject:
   m_ObjectHideFlags: 0

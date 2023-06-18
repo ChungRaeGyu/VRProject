@@ -12,19 +12,20 @@ public class OpenDoor : MonoBehaviour {
 
 	private Vector3 defaultRot;
 	private Vector3 openRot;
-	public static bool open;
+	public bool open;
 	private bool enter;
+	private bool click = false;
 
 
 	// Use this for initialization
-	void Start () {
+	private void Start () {
 		
 			defaultRot = transform.eulerAngles;
 			openRot = new Vector3 (defaultRot.x, defaultRot.y + DoorOpenAngle, defaultRot.z);
 		}
-	
+
 	// Update is called once per frame
-	void Update () {
+	private void Update () {
 		if (open) {
 			if (AudioS == false) {
 				gameObject.GetComponent<AudioSource> ().PlayOneShot (OpenAudio);
@@ -39,39 +40,45 @@ public class OpenDoor : MonoBehaviour {
 			transform.eulerAngles = Vector3.Slerp (transform.eulerAngles, defaultRot, Time.deltaTime * smooth);
 
 		}
-
-        if (enter == true)
+		if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger) && enter || OVRInput.GetDown(OVRInput.Button.SecondaryIndexTrigger) && enter)
+		{
+			open = !open;
+			click = true;
+			PlayerScript.attention_level += 25;
+			Debug.Log("어그로 수치: " + PlayerScript.attention_level);
+		}
+		if (click == true)
         {
-            if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.LTouch) || OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger, OVRInput.Controller.RTouch))
-            {
-				open = !open;
-				PlayerScript.attention_level += 25;
+			click = false;
+        }
+
+	}
+
+    void OnTriggerEnter(Collider col)
+    {
+        if (col.gameObject.CompareTag("Player"))
+        {
+			if (col.tag == "Player")
+			{
+				enter = true;
 			}
-        }
-
+		}
     }
 
-    void OnTriggerStay(Collider col)
+    private void OnTriggerExit(Collider col)
     {
-        if (col.tag == "Player")
-        {
-            enter = true;
-        }
-    }
+		if (col.tag == "Player")
+		{
+			enter = false;
+		}
+	}
 
-    void OnTriggerExit(Collider col)
+
+    IEnumerator ButtonClick()
     {
-        if (col.tag == "Player")
-        {
-            enter = false;
-        }
+        open = !open;
+		PlayerScript.attention_level += 25;
+        yield return null;
     }
-
-    //IEnumerator ButtonClick()
-    //{
-    //    open = !open;
-    //    PlayerScript.attention_level += 25;
-    //    yield return null;
-    //}
 
 }

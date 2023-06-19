@@ -52,8 +52,13 @@ public class FinishDoor : MonoBehaviour
 
 	void OnTriggerEnter(Collider col)
 	{
-		if (col.gameObject.tag == "Key")
-		{
+		//if (col.gameObject.tag == "Key")
+		//{
+		//	open = true;
+		//	Destroy(col.gameObject);
+		//}
+		if(col.gameObject.CompareTag("Key"))
+        {
 			open = true;
 			Destroy(col.gameObject);
 		}

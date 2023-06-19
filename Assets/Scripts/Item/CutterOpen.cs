@@ -4,23 +4,24 @@ using UnityEngine;
 
 public class CutterOpen : MonoBehaviour
 {
+    GameObject chainObject;
+    GameObject StealDoor;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        chainObject = transform.Find("Chain").gameObject;
+        StealDoor = transform.Find("MeshFence").gameObject;
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     private void OnTriggerEnter(Collider coll)
     {
-        if(coll.gameObject.tag == "Cutter")
+        if(coll.CompareTag("Cutter"))
         {
-            //Destroy(this);
+            Destroy(coll.gameObject);
+            chainObject.SetActive(false);
+            StealDoor.SetActive(false);
         }
     }
 }

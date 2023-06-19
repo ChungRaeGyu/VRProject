@@ -33,7 +33,7 @@ public class PlayerScript : MonoBehaviour
 
     //public GameObject UIImage;
     //public Text HealthItem;
-
+    public bool dieTest=false;
     // Start is called before the first frame update
     void Start()
     {
@@ -63,6 +63,7 @@ public class PlayerScript : MonoBehaviour
             GameObject.Find("CatchCamera").GetComponent<AudioListener>().enabled = true;
             GameObject.Find("HorrorGirl").GetComponent<GhostScript_NoPoint>().PlayerDIeAction(); //����ȿ���� ����
             PlayerDie = true;
+            dieTest=false;
             return;
         }
         //��׷� ��ġ ����~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

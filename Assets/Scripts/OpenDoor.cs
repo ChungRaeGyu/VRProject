@@ -105,12 +105,9 @@ public class OpenDoor : MonoBehaviour {
 
     void OnTriggerEnter(Collider col)
     {
-        if (col.gameObject.CompareTag("Player"))
+        if (col.tag == "Player")
         {
-            if (col.tag == "Player")
-            {
-                enter = true;
-            }
+            enter = true;
         }
     }
 

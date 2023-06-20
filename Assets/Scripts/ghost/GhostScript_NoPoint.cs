@@ -35,7 +35,8 @@ public class GhostScript_NoPoint : MonoBehaviour
     Animator anim;
     //-------------------------------------------------ghost audio
     AudioSource over50perSound;
-
+    //얼굴 
+    public GameObject ghostImage; 
     Rigidbody rigid;
     // Start is called before the first frame update
     void Start()
@@ -49,6 +50,8 @@ public class GhostScript_NoPoint : MonoBehaviour
         hairs = transform.GetChild(2).GetComponent<Renderer>().material;
         tr = GetComponent<Transform>();
         anim = GetComponent<Animator>();
+        ghostImage.SetActive(true);
+        ghostImage.transform.Translate(-ghostImage.transform.forward * 100*Time.deltaTime);
         
         //초기값 저장
     }
@@ -80,6 +83,8 @@ public class GhostScript_NoPoint : MonoBehaviour
                 if (distance < playerDistance)
                 {
                     Debug.Log(" 거리 : " + distance);
+                    ghostImage.SetActive(true);
+                    ghostImage.transform.Translate(ghostImage.transform.forward*4);
                     StartCoroutine(catchPlayer(false));
                 }
             }

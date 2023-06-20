@@ -11,6 +11,7 @@ public class PlayerScript : MonoBehaviour
     /// </summary>
     public static int PlayerHP = 2;
     public Image[] HealthImage;
+    
     public bool attacked;
     //��׷� ��ġ ���� {
     public static float attention_level; //��׷� ��ġ

@@ -15,7 +15,7 @@ public class GhostScript_NoPoint : MonoBehaviour
     float timer = 20.0f;
     float time;
     public Transform Player;
-    float playerDistance = 2f;
+    float playerDistance = 1f;
     
     public float speed = 5.0f;  //이동 속도
     public float damping = 3.0f; //회전 시 회전 속도를 조절하는 계수

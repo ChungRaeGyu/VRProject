@@ -57,10 +57,8 @@ public class PlayerScript : MonoBehaviour
         {
             Debug.Log("플레이어 HP" + PlayerHP);
             //���� ��ȯ 
-            GameObject.Find("CenterEyeAnchor").GetComponent<Camera>().enabled = false;
-            GameObject.Find("CenterEyeAnchor").GetComponent<AudioListener>().enabled = false;
-            GameObject.Find("CatchCamera").GetComponent<Camera>().enabled = true;
-            GameObject.Find("CatchCamera").GetComponent<AudioListener>().enabled = true;
+            transform.position = new Vector3(0.535f,4.833f,-14.604f);
+            transform.rotation = Quaternion.Euler(0f,180f,0f);
             GameObject.Find("HorrorGirl").GetComponent<GhostScript_NoPoint>().PlayerDIeAction(); //����ȿ���� ����
             PlayerDie = true;
             dieTest=false;

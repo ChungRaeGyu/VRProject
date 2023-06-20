@@ -72,7 +72,7 @@ public class PlayerScript : MonoBehaviour
             if(GhostScript_NoPoint.diestart == false)
             GameObject.Find("HorrorGirl").GetComponent<GhostScript_NoPoint>().setDirection(transform.position);
         }
-        else if(attention_level>=50){
+        else if(test>=50){
             if(timer>settime){
                 Debug.Log("체크");
                 timer=0;

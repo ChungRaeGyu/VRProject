@@ -19,7 +19,8 @@ public class GhostScript_NoPoint : MonoBehaviour
     
     public float speed = 5.0f;  //이동 속도
     public float damping = 3.0f; //회전 시 회전 속도를 조절하는 계수
-
+    Vector3 spawn= new Vector3(-11f,3.510628f,-3);
+    //사용 할 곳 (50per, catch)
     private Transform tr;    //캐릭터의 Transform값을 담을 함수
     private Material girl;
     private Material cloth;
@@ -136,8 +137,11 @@ public class GhostScript_NoPoint : MonoBehaviour
             Color ccolor = cloth.color;
             ccolor.a = currentAlpha;
             cloth.color = ccolor;
+
+            
             yield return null;
         }
+        transform.position = spawn;
     }
     public void over50per(){ //정신력 수치가 50퍼 이상일 때
         StartCoroutine(Fadein(1));
@@ -195,6 +199,7 @@ public class GhostScript_NoPoint : MonoBehaviour
 
             yield return null;
         }
+        transform.position = spawn;
     }
 
     private System.Collections.IEnumerator Fadein(float duration)

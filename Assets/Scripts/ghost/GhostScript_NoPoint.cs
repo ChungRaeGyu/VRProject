@@ -15,7 +15,7 @@ public class GhostScript_NoPoint : MonoBehaviour
     float timer = 20.0f;
     float time;
     public Transform Player;
-    float playerDistance = 0.5f;
+    float playerDistance = 1.5f;
     
     public float speed = 5.0f;  //이동 속도
     public float damping = 3.0f; //회전 시 회전 속도를 조절하는 계수
@@ -50,8 +50,6 @@ public class GhostScript_NoPoint : MonoBehaviour
         hairs = transform.GetChild(2).GetComponent<Renderer>().material;
         tr = GetComponent<Transform>();
         anim = GetComponent<Animator>();
-        ghostImage.SetActive(true);
-        ghostImage.transform.Translate(-ghostImage.transform.forward * 100*Time.deltaTime);
         
         //초기값 저장
     }
@@ -84,7 +82,7 @@ public class GhostScript_NoPoint : MonoBehaviour
                 {
                     Debug.Log(" 거리 : " + distance);
                     ghostImage.SetActive(true);
-                    ghostImage.transform.Translate(ghostImage.transform.forward*4);
+                    ghostImage.GetComponent<Animator>().SetTrigger("Damaged");
                     StartCoroutine(catchPlayer(false));
                 }
             }
@@ -111,7 +109,9 @@ public class GhostScript_NoPoint : MonoBehaviour
         first = true;
         time = 0;
         Player.GetComponent<PlayerScript>().attacked = true;
-        yield return null;
+        yield return new WaitForSecondsRealtime(1.5f);
+        ghostImage.SetActive(false);
+        
     }
     IEnumerator velocity0(){
         yield return new WaitForSecondsRealtime(2.5f);

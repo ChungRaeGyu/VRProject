@@ -5,24 +5,24 @@ using UnityEngine.UI;
 
 public class CutterOpen : MonoBehaviour
 {
-    GameObject chainObject;
     GameObject StealDoor;
     Text StealTxt;
 
     private bool enter;
+    private bool Lock;
 
     // Start is called before the first frame update
     void Start()
     {
         enter = false;
-        chainObject = transform.Find("Chain").gameObject;
-        StealDoor = transform.Find("MeshFence").gameObject;
+        Lock = true;
+        StealDoor = this.gameObject;
         StealTxt = GameObject.Find("StealLock").GetComponent<Text>();
     }
 
     void Update()
     {
-        if(enter)
+        if(enter == true && Lock == true)
         {
             if (OVRInput.GetDown(OVRInput.Button.PrimaryIndexTrigger) || OVRInput.GetDown(OVRInput.Button.SecondaryIndexTrigger))
             {
@@ -36,8 +36,8 @@ public class CutterOpen : MonoBehaviour
         if(coll.CompareTag("Cutter"))
         {
             Destroy(coll.gameObject);
-            chainObject.SetActive(false);
             StealDoor.SetActive(false);
+            Lock = false;
         }
         if(coll.CompareTag("Player"))
         {

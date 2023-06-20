@@ -41,7 +41,7 @@ public class DistanceGrabModel : MonoBehaviour
             {
                 StartCoroutine(EnableHandModelVisibilityAfterDelay(true));
             }
-            else if(OVRInput.GetDown(OVRInput.Button.Two))
+            else if(OVRInput.Get(OVRInput.Button.Two))
             {
                 StartCoroutine(EnableHandModelVisibilityAfterDelay(true));
             }

@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
-
+using UnityEngine.SceneManagement;
 public class FinishDoor : MonoBehaviour
 {
 	Text FinishLockTxt;
@@ -39,6 +39,7 @@ public class FinishDoor : MonoBehaviour
 				AudioS = true;
 			}
 			transform.eulerAngles = Vector3.Slerp(transform.eulerAngles, openRot, Time.deltaTime * smooth);
+            SceneManager.LoadScene("Scenes/GameClear");
 		}
 		else
 		{

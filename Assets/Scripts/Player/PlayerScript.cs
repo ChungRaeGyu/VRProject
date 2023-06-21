@@ -36,11 +36,14 @@ public class PlayerScript : MonoBehaviour
     //public GameObject UIImage;
     //public Text HealthItem;
     public bool dieTest=false;
+    AudioSource heartbit;
+    bool Audiobool = true;
     // Start is called before the first frame update
     void Start()
     {
         HealthImage = GameObject.Find("Canvas(hp)").GetComponentsInChildren<Image>();
         attentionText = GameObject.Find("attentionText").GetComponent<Text>();
+        heartbit = GetComponent<AudioSource>();
         drawHealth();
         attacked=false;
         decreaseAmount=1;
@@ -67,10 +70,16 @@ public class PlayerScript : MonoBehaviour
         }
         //��׷� ��ġ ����~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         //��׷μ�ġ�� 100�̻� �Ǹ� ��������
-        if (attention_level >= 100)
+        if (test >= 100)
         {
-            if(GhostScript_NoPoint.diestart == false)
-            GameObject.Find("HorrorGirl").GetComponent<GhostScript_NoPoint>().setDirection(transform.position);
+            if(GhostScript_NoPoint.diestart == false){
+                GameObject.Find("HorrorGirl").GetComponent<GhostScript_NoPoint>().setDirection(transform.position);
+                if(Audiobool){
+                    heartbit.Play();
+                    Audiobool=false;
+                }
+                
+            }
         }
         else if(attention_level >=50){
             if(timer>settime){
@@ -98,6 +107,7 @@ public class PlayerScript : MonoBehaviour
             PlayerHP--;
             drawHealth();
             attacked = false;
+            Audiobool=true;
         }
 
 

@@ -11,6 +11,7 @@ public class PlayerScript : MonoBehaviour
     /// </summary>
     public static int PlayerHP = 2;
     public Image[] HealthImage;
+    Text attentionText;
     
     public bool attacked;
     //��׷� ��ġ ���� {
@@ -39,6 +40,7 @@ public class PlayerScript : MonoBehaviour
     void Start()
     {
         HealthImage = GameObject.Find("Canvas(hp)").GetComponentsInChildren<Image>();
+        attentionText = GameObject.Find("attentionText").GetComponent<Text>();
         drawHealth();
         attacked=false;
         decreaseAmount=1;
@@ -46,18 +48,17 @@ public class PlayerScript : MonoBehaviour
         settime=5;
         timer=0;
         Debug.Log("시작 HP : " + PlayerHP);
-        attention_level = test;
+        
     }
 
     // Update is called once per frame
     void Update()
     {
         
-        num=attention_level;
-        if (PlayerHP < 0&&PlayerDie==false)
+        attentionText.text="어그로 수치 : "+attention_level;
+        if (PlayerHP >10&&PlayerDie==false)
         {
             Debug.Log("플레이어 HP" + PlayerHP);
-            //���� ��ȯ 
             transform.position = new Vector3(0.535f,4.833f,-14.604f);
             transform.rotation = Quaternion.Euler(0f,180f,0f);
             GameObject.Find("HorrorGirl").GetComponent<GhostScript_NoPoint>().PlayerDIeAction(); //����ȿ���� ����

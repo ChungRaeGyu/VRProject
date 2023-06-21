@@ -100,7 +100,7 @@ public class UIManager : MonoBehaviour
         menuExitButton.onClick.AddListener(OnMenuExitButtonAct);
         menuCancleButton.onClick.AddListener(OnMenuCancleButtonAct);
 
-        newGameButton.onClick.AddListener(OnNewGameButtonAct);
+        newGameButton.onClick.AddListener(OnGameStartButtonAct);
         loadGameButton.onClick.AddListener(OnLoadGameButtonAct);
 
         nGF_GoToLoadGameFormButton.onClick.AddListener(OnNGF_GoToLoadGameFormButtonAct);
@@ -165,11 +165,11 @@ public class UIManager : MonoBehaviour
         mainUI.SetActive(true);
     }
 
-    void OnNewGameButtonAct()
-    {
-        gameForm.SetActive(false);
-        newGameForm.SetActive(true);
-    }
+    //void OnNewGameButtonAct()
+    //{
+    //    gameForm.SetActive(false);
+    //    newGameForm.SetActive(true);
+    //}
 
     void OnLoadGameButtonAct()
     {

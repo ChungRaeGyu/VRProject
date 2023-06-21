@@ -11,9 +11,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MapCustom.unity
     guid: 75d6ecdc3732e7947a0172c2c2b61a4a
-  - enabled: 0
+  - enabled: 1
     path: Assets/Scenes/GameClear.unity
     guid: 62052586a2fea2740986784c1f74839e
+  - enabled: 1
+    path: Assets/Scenes/Clear.unity
+    guid: ed4af4c51b3295f44915cb80987c4a6e
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: d977aee4df579fc4baae13d61301a3b9, type: 2}
     com.unity.xr.management.loader_settings: {fileID: 11400000, guid: a0cd968dfb6bc7848a490e788dda0270, type: 2}

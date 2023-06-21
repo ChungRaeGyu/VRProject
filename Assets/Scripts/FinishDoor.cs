@@ -31,25 +31,10 @@ public class FinishDoor : MonoBehaviour
 	// Update is called once per frame
 	void Update()
 	{
-		if (open)
+		if (open == true)
 		{
-			if (AudioS == false)
-			{
-				gameObject.GetComponent<AudioSource>().PlayOneShot(OpenAudio);
-				AudioS = true;
-			}
-			transform.eulerAngles = Vector3.Slerp(transform.eulerAngles, openRot, Time.deltaTime * smooth);
+			
             SceneManager.LoadScene("Scenes/GameClear");
-		}
-		else
-		{
-			if (AudioS == true)
-			{
-				gameObject.GetComponent<AudioSource>().PlayOneShot(CloseAudio);
-				AudioS = false;
-			}
-			transform.eulerAngles = Vector3.Slerp(transform.eulerAngles, defaultRot, Time.deltaTime * smooth);
-
 		}
 		if(enter == true && open == false)
         {

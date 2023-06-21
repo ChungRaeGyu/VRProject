@@ -48,7 +48,6 @@ public class PlayerScript : MonoBehaviour
         settime=5;
         timer=0;
         Debug.Log("시작 HP : " + PlayerHP);
-        
     }
 
     // Update is called once per frame
